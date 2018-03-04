@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Maze/Goal.swift"
-            timestampString = "541850144.4499069"
+            timestampString = "541852291.2353311"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
             landmarkName = "contactWithEntityDidBegin(_:contact:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Maze/Goal.swift"
-            timestampString = "541850144.450073"
+            timestampString = "541852291.235458"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
             landmarkName = "contactWithEntityDidEnd(_:contact:)"
             landmarkType = "7">
          </BreakpointContent>

@@ -71,6 +71,9 @@ class GameScene: BaseScene {
             let playerNode = game.player.component(ofType: SpriteComponent.self)?.node
         else { return }
         
+        let lightNode = SKLightNode()
+        playerCamera.addChild(lightNode)
+        
         let goalPosition = convert(goalNode.position, from: mazeNode)
         let playerPosition = convert(playerNode.position, from: mazeNode)
         
@@ -86,7 +89,10 @@ class GameScene: BaseScene {
         
         let actionSequence = SKAction.sequence([zoomOutAction, moveToPlayerAction, zoomInAction])
         
-        playerCamera.run(actionSequence) { completion() }
+        playerCamera.run(actionSequence) {
+            lightNode.removeFromParent()
+            completion()
+        }
     }
     
     private func setupPlayerCamera() {
