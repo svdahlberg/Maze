@@ -17,7 +17,7 @@ class GameScene: BaseScene {
     lazy var game: Game = Game(mazeNode: mazeNode)
     
     private lazy var mazeNode: MazeNode = {
-        let mazeNode = MazeNode(color: .darkGray, roomSize: CGSize(width: 30, height: 30), dimensions: (cols: 3, rows: 3))
+        let mazeNode = MazeNode(color: .darkGray, roomSize: CGSize(width: 30, height: 30), dimensions: (cols: 10, rows: 10))
         mazeNode.position = CGPoint(x: size.height/2, y: size.height/2)
         return mazeNode
     }()
@@ -57,14 +57,45 @@ class GameScene: BaseScene {
         view?.addGestureRecognizer(swipeDown)
     }
     
+    // MARK: Camera
+    
     private func setupCamera() {
-        guard let playerNode = game.player.component(ofType: SpriteComponent.self)?.node else { return }
         playerCamera = SKCameraNode()
-        playerCamera.constraints = [SKConstraint.distance(SKRange(constantValue: 0), to: playerNode)]
-        playerCamera.setScale(cameraScale)
         addChild(playerCamera)
         camera = playerCamera
+        showGoalAndMap() { self.setupPlayerCamera() }
     }
+    
+    private func showGoalAndMap(completion: @escaping () -> Void) {
+        guard let goalNode = game.goal.component(ofType: SpriteComponent.self)?.node,
+            let playerNode = game.player.component(ofType: SpriteComponent.self)?.node
+        else { return }
+        
+        let goalPosition = convert(goalNode.position, from: mazeNode)
+        let playerPosition = convert(playerNode.position, from: mazeNode)
+        
+        playerCamera.position = goalPosition
+        playerCamera.setScale(cameraScale)
+        
+        let zoomOutAction = SKAction.scale(to: 2, duration: 2)
+        zoomOutAction.timingMode = .easeOut
+        let moveToPlayerAction = SKAction.move(to: playerPosition, duration: 3)
+        moveToPlayerAction.timingMode = .easeInEaseOut
+        let zoomInAction = SKAction.scale(to: cameraScale, duration: 1)
+        zoomInAction.timingMode = .easeIn
+        
+        let actionSequence = SKAction.sequence([zoomOutAction, moveToPlayerAction, zoomInAction])
+        
+        playerCamera.run(actionSequence) { completion() }
+    }
+    
+    private func setupPlayerCamera() {
+        guard let playerNode = game.player.component(ofType: SpriteComponent.self)?.node else { return }
+        playerCamera.constraints = [SKConstraint.distance(SKRange(constantValue: 0), to: playerNode)]
+        playerCamera.setScale(cameraScale)
+    }
+    
+    // MARK: Update
     
     override func update(_ currentTime: TimeInterval) {
         super.update(currentTime)

@@ -38,7 +38,7 @@ struct LightType {
             ambientColor = .black
             lightColor = .white
         case .goalLight:
-            falloff = 4
+            falloff = 0
             ambientColor = .black
             lightColor = .yellow
         }

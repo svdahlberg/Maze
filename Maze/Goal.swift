@@ -26,6 +26,9 @@ class Goal: GKEntity {
         addComponent(physicsComponent)
         spriteComponent.node.physicsBody = physicsComponent.physicsBody
         
+        let lightComponent = LightComponent(lightCategory: .goalLight)
+        addComponent(lightComponent)
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
