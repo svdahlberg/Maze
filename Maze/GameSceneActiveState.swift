@@ -12,19 +12,12 @@ import GameplayKit
 
 class GameSceneActiveState: GKState {
     
-    unowned let gameScene: GameScene
+    unowned let game: Game
     
-    var allKeysCollected: Bool {
-        guard let keys = gameScene.keys else { return true }
-        return !keys.contains { key in
-            return !key.collected
-        }
-    }
-    
-    init(gameScene: GameScene, player: Player) {
-        self.gameScene = gameScene
+    init(game: Game) {
+        self.game = game
         super.init()
-        player.delegate = self
+        game.player.delegate = self
     }
     
     override func didEnter(from previousState: GKState?) {
@@ -46,7 +39,7 @@ class GameSceneActiveState: GKState {
 
 extension GameSceneActiveState: PlayerDelegate {
     func playerDidReachGoal(_ goal: Goal) {
-        guard allKeysCollected else {
+        guard game.allKeysCollected else {
             print("Need more keys")
             // update UI
             return
