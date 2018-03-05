@@ -14,6 +14,7 @@
 		B2222FF0204BE40B0070F272 /* ArrayExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2222FEF204BE40B0070F272 /* ArrayExtensionsTests.swift */; };
 		B231691D204C0584003BCD74 /* MazeSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B231691C204C0584003BCD74 /* MazeSolver.swift */; };
 		B231691F204C092E003BCD74 /* MazeSolverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B231691E204C092E003BCD74 /* MazeSolverTests.swift */; };
+		B2316922204DAB53003BCD74 /* TimeIntervalExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2316921204DAB53003BCD74 /* TimeIntervalExtensionsTests.swift */; };
 		B279734E1D606E6D00FE6313 /* Maze.swift in Sources */ = {isa = PBXBuildFile; fileRef = B279734D1D606E6D00FE6313 /* Maze.swift */; };
 		B27973501D60807F00FE6313 /* MazeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B279734F1D60807F00FE6313 /* MazeFactory.swift */; };
 		B27973531D6081AD00FE6313 /* MazeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27973521D6081AD00FE6313 /* MazeNode.swift */; };
@@ -81,6 +82,7 @@
 		B2222FEF204BE40B0070F272 /* ArrayExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensionsTests.swift; sourceTree = "<group>"; };
 		B231691C204C0584003BCD74 /* MazeSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MazeSolver.swift; sourceTree = "<group>"; };
 		B231691E204C092E003BCD74 /* MazeSolverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MazeSolverTests.swift; sourceTree = "<group>"; };
+		B2316921204DAB53003BCD74 /* TimeIntervalExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalExtensionsTests.swift; sourceTree = "<group>"; };
 		B279734D1D606E6D00FE6313 /* Maze.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Maze.swift; sourceTree = "<group>"; };
 		B279734F1D60807F00FE6313 /* MazeFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MazeFactory.swift; sourceTree = "<group>"; };
 		B27973521D6081AD00FE6313 /* MazeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MazeNode.swift; sourceTree = "<group>"; };
@@ -141,6 +143,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B2316920204DAAE1003BCD74 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B2C154A11F657554009A041C /* ClassExtensions.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		B27973511D60816A00FE6313 /* Nodes */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,7 +186,7 @@
 			children = (
 				B2C83C971CD270F900975C75 /* AppDelegate.swift */,
 				B2C83C9D1CD270F900975C75 /* GameViewController.swift */,
-				B2C154A11F657554009A041C /* ClassExtensions.swift */,
+				B2316920204DAAE1003BCD74 /* Model */,
 				B2D486C71F49795500D82D1B /* Scenes */,
 				B2D486D41F497D9A00D82D1B /* Entities */,
 				B2D486D51F497DA600D82D1B /* Components */,
@@ -195,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				B2222FEF204BE40B0070F272 /* ArrayExtensionsTests.swift */,
+				B2316921204DAB53003BCD74 /* TimeIntervalExtensionsTests.swift */,
 				B231691E204C092E003BCD74 /* MazeSolverTests.swift */,
 				B2C83CB21CD270F900975C75 /* Info.plist */,
 			);
@@ -456,6 +467,7 @@
 			files = (
 				B2222FF0204BE40B0070F272 /* ArrayExtensionsTests.swift in Sources */,
 				B231691F204C092E003BCD74 /* MazeSolverTests.swift in Sources */,
+				B2316922204DAB53003BCD74 /* TimeIntervalExtensionsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

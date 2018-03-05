@@ -24,3 +24,12 @@ extension Array {
         return Array(copy.suffix(n))
     }
 }
+
+extension TimeInterval {
+    static func duration(toMoveFrom pointA: CGPoint, to pointB: CGPoint, with speed: CGFloat) -> TimeInterval {
+        let xDistance = (pointB.x - pointA.x)
+        let yDistance = (pointB.y - pointA.y)
+        let distance = sqrt((xDistance * xDistance) + (yDistance * yDistance))
+        return TimeInterval(distance/speed)
+    }
+}
