@@ -15,7 +15,7 @@ extension CGPoint {
     }
 }
 
-extension ArraySlice {
+extension Array {
     subscript (randomPick n: Int) -> [Element] {
         var copy = self
         for i in stride(from: count - 1, to: Swift.max((count - n - 1), 0), by: -1) {

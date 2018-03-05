@@ -62,8 +62,10 @@ class Game {
     }
     
     private func placeKeysInMaze() {
-        guard let deadEnds = mazeNode.deadEnds()?.dropLast().dropFirst()[randomPick: 3] else { return }
-        keys = deadEnds.map { (room: Room) -> Key in
+        guard let deadEnds = mazeNode.deadEnds() else { return }
+        let possibleKeyRooms = Array(deadEnds.dropLast().dropFirst())
+        let keyRooms = possibleKeyRooms[randomPick: 3]
+        keys = keyRooms.map { (room: Room) -> Key in
             let key = Key()
             if let keyNode = key.component(ofType: SpriteComponent.self)?.node {
                 keyNode.position = mazeNode.position(forRoom: room)

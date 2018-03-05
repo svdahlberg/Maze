@@ -11,7 +11,9 @@
 		B2216FE41F372C0800576F36 /* Wall.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2216FE31F372C0800576F36 /* Wall.swift */; };
 		B2216FE61F372C3900576F36 /* RoomNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2216FE51F372C3900576F36 /* RoomNode.swift */; };
 		B2222FEE204AB20F0070F272 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2222FED204AB20F0070F272 /* Game.swift */; };
-		B2222FF0204BE40B0070F272 /* ArraySliceExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2222FEF204BE40B0070F272 /* ArraySliceExtensionsTests.swift */; };
+		B2222FF0204BE40B0070F272 /* ArrayExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2222FEF204BE40B0070F272 /* ArrayExtensionsTests.swift */; };
+		B231691D204C0584003BCD74 /* MazeSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B231691C204C0584003BCD74 /* MazeSolver.swift */; };
+		B231691F204C092E003BCD74 /* MazeSolverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B231691E204C092E003BCD74 /* MazeSolverTests.swift */; };
 		B279734E1D606E6D00FE6313 /* Maze.swift in Sources */ = {isa = PBXBuildFile; fileRef = B279734D1D606E6D00FE6313 /* Maze.swift */; };
 		B27973501D60807F00FE6313 /* MazeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B279734F1D60807F00FE6313 /* MazeFactory.swift */; };
 		B27973531D6081AD00FE6313 /* MazeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27973521D6081AD00FE6313 /* MazeNode.swift */; };
@@ -76,7 +78,9 @@
 		B2216FE31F372C0800576F36 /* Wall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wall.swift; sourceTree = "<group>"; };
 		B2216FE51F372C3900576F36 /* RoomNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomNode.swift; sourceTree = "<group>"; };
 		B2222FED204AB20F0070F272 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
-		B2222FEF204BE40B0070F272 /* ArraySliceExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArraySliceExtensionsTests.swift; sourceTree = "<group>"; };
+		B2222FEF204BE40B0070F272 /* ArrayExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensionsTests.swift; sourceTree = "<group>"; };
+		B231691C204C0584003BCD74 /* MazeSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MazeSolver.swift; sourceTree = "<group>"; };
+		B231691E204C092E003BCD74 /* MazeSolverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MazeSolverTests.swift; sourceTree = "<group>"; };
 		B279734D1D606E6D00FE6313 /* Maze.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Maze.swift; sourceTree = "<group>"; };
 		B279734F1D60807F00FE6313 /* MazeFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MazeFactory.swift; sourceTree = "<group>"; };
 		B27973521D6081AD00FE6313 /* MazeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MazeNode.swift; sourceTree = "<group>"; };
@@ -190,7 +194,8 @@
 		B2C83CAF1CD270F900975C75 /* MazeTests */ = {
 			isa = PBXGroup;
 			children = (
-				B2222FEF204BE40B0070F272 /* ArraySliceExtensionsTests.swift */,
+				B2222FEF204BE40B0070F272 /* ArrayExtensionsTests.swift */,
+				B231691E204C092E003BCD74 /* MazeSolverTests.swift */,
 				B2C83CB21CD270F900975C75 /* Info.plist */,
 			);
 			path = MazeTests;
@@ -208,6 +213,7 @@
 		B2C83CCB1CD271DD00975C75 /* Maze */ = {
 			isa = PBXGroup;
 			children = (
+				B231691C204C0584003BCD74 /* MazeSolver.swift */,
 				B279734D1D606E6D00FE6313 /* Maze.swift */,
 				B2D486C51F49577800D82D1B /* Direction.swift */,
 				B2216FE11F372BE700576F36 /* Room.swift */,
@@ -418,6 +424,7 @@
 				B2D486D01F497C7B00D82D1B /* ContactNotifiableType.swift in Sources */,
 				B2D486D71F49DAC700D82D1B /* LightComponent.swift in Sources */,
 				B2222FEE204AB20F0070F272 /* Game.swift in Sources */,
+				B231691D204C0584003BCD74 /* MazeSolver.swift in Sources */,
 				B2D486CE1F497C0600D82D1B /* ColliderType.swift in Sources */,
 				B2C83C9E1CD270F900975C75 /* GameViewController.swift in Sources */,
 				B2216FE21F372BE700576F36 /* Room.swift in Sources */,
@@ -447,7 +454,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2222FF0204BE40B0070F272 /* ArraySliceExtensionsTests.swift in Sources */,
+				B2222FF0204BE40B0070F272 /* ArrayExtensionsTests.swift in Sources */,
+				B231691F204C092E003BCD74 /* MazeSolverTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
