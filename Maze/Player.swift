@@ -56,7 +56,7 @@ class Player: GKEntity {
         movementDirection = direction
         playerNode.removeAction(forKey: moveActionKey)
         let moveAction = SKAction.move(to: mazeNode.positionForNextRoom(inDirection: direction),
-                                       duration: duration(toMoveFromPointA: playerNode.position, toPointB: mazeNode.positionForNextRoom(inDirection: direction), withSpeed: movementSpeed))
+                                       duration: TimeInterval.duration(toMoveFrom: playerNode.position, to: mazeNode.positionForNextRoom(inDirection: direction), with: movementSpeed))
         let completion = SKAction.run {
             mazeNode.updateCurrentRoom(withRoomInDirection: direction)
             self.movementDirection = nil
@@ -64,12 +64,6 @@ class Player: GKEntity {
         playerNode.run(SKAction.sequence([moveAction, completion]), withKey: moveActionKey)
     }
     
-    private func duration(toMoveFromPointA pointA: CGPoint, toPointB pointB: CGPoint, withSpeed speed: CGFloat) -> TimeInterval {
-        let xDist = (pointB.x - pointA.x)
-        let yDist = (pointB.y - pointA.y)
-        let distance = sqrt((xDist * xDist) + (yDist * yDist))
-        return TimeInterval(distance/speed)
-    }
 }
 
 

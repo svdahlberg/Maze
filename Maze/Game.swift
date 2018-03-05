@@ -15,7 +15,11 @@ class Game {
     private var entities = Set<GKEntity>()
     var mazeNode: MazeNode
     let player = Player()
-    let goal = Goal()
+    lazy var goal: Goal? = {
+        guard let goalRoom = mazeNode.deadEnds()?.last else { return nil }
+        return Goal(room: goalRoom)
+    }()
+    
     var keys: [Key]?
     
     var numberOfKeys: Int {
@@ -54,9 +58,10 @@ class Game {
     }
     
     private func placeGoalInMaze() {
-        guard let goalNodeRoom = mazeNode.deadEnds()?.last else { return }
-        guard let goalNode = goal.component(ofType: SpriteComponent.self)?.node else { return }
-        goalNode.position = mazeNode.position(forRoom: goalNodeRoom)
+        guard let goal = goal,
+            let goalNode = goal.component(ofType: SpriteComponent.self)?.node
+            else { return }
+        goalNode.position = mazeNode.position(forRoom: goal.room)
         mazeNode.addChild(goalNode)
         entities.insert(goal)
     }

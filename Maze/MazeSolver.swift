@@ -58,7 +58,7 @@ class Path {
         var accumulatedRooms = accumulatedRooms
         accumulatedRooms.append(room)
         guard let previousPath = previousPath else {
-            return accumulatedRooms
+            return accumulatedRooms.reversed()
         }
         return previousPath.rooms(accumulatedRooms: accumulatedRooms)
     }
@@ -67,7 +67,7 @@ class Path {
         var accumulatedDirections = accumulatedDirections
         guard let directionTraveledIn = directionTraveledIn,
             let previousPath = previousPath else {
-            return accumulatedDirections
+            return accumulatedDirections.reversed()
         }
         accumulatedDirections.append(directionTraveledIn)
         return previousPath.directions(accumulatedDirections: accumulatedDirections)

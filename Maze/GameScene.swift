@@ -67,12 +67,10 @@ class GameScene: BaseScene {
     }
     
     private func showGoalAndMap(completion: @escaping () -> Void) {
-        guard let goalNode = game.goal.component(ofType: SpriteComponent.self)?.node,
+        guard let goal = game.goal,
+            let goalNode = goal.component(ofType: SpriteComponent.self)?.node,
             let playerNode = game.player.component(ofType: SpriteComponent.self)?.node
         else { return }
-        
-        let lightNode = SKLightNode()
-        playerCamera.addChild(lightNode)
         
         let goalPosition = convert(goalNode.position, from: mazeNode)
         let playerPosition = convert(playerNode.position, from: mazeNode)
@@ -87,7 +85,21 @@ class GameScene: BaseScene {
         let zoomInAction = SKAction.scale(to: cameraScale, duration: 1)
         zoomInAction.timingMode = .easeIn
         
-        let actionSequence = SKAction.sequence([zoomOutAction, moveToPlayerAction, zoomInAction])
+        let lightNode = SKLightNode()
+        playerCamera.addChild(lightNode)
+        let path = MazeSolver(maze: mazeNode.maze, start: goal.room, end: mazeNode.maze.currentRoom).solve()
+        let roomPath = path!.rooms()
+        let positionPath = roomPath.map { mazeNode.position(forRoom: $0) }
+        
+        var previousPoint = goalPosition
+        let pathActions = positionPath.map { (position: CGPoint) -> SKAction in
+            let point = convert(position, from: mazeNode)
+            let action = SKAction.move(to: point, duration: TimeInterval.duration(toMoveFrom: previousPoint, to: point, with: 200))
+            previousPoint = point
+            return action
+        }
+        
+        let actionSequence = SKAction.sequence([zoomOutAction, SKAction.sequence(pathActions), zoomInAction])
         
         playerCamera.run(actionSequence) {
             lightNode.removeFromParent()

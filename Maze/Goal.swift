@@ -11,7 +11,10 @@ import GameplayKit
 
 class Goal: GKEntity {
     
-    override init() {
+    let room: Room
+    
+    init(room: Room) {
+        self.room = room
         super.init()
         
         ColliderType.definedCollisions[.goal] = []
