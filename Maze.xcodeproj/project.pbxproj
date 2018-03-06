@@ -15,6 +15,11 @@
 		B231691D204C0584003BCD74 /* MazeSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B231691C204C0584003BCD74 /* MazeSolver.swift */; };
 		B231691F204C092E003BCD74 /* MazeSolverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B231691E204C092E003BCD74 /* MazeSolverTests.swift */; };
 		B2316922204DAB53003BCD74 /* TimeIntervalExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2316921204DAB53003BCD74 /* TimeIntervalExtensionsTests.swift */; };
+		B2316924204DC64C003BCD74 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2316923204DC64C003BCD74 /* Level.swift */; };
+		B2316926204DC6B2003BCD74 /* LevelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2316925204DC6B1003BCD74 /* LevelTests.swift */; };
+		B2316928204DC982003BCD74 /* GameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2316927204DC982003BCD74 /* GameTests.swift */; };
+		B231692A204F1BFC003BCD74 /* GameSceneSuccessState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2316929204F1BFC003BCD74 /* GameSceneSuccessState.swift */; };
+		B231692C204F1C5A003BCD74 /* SuccessScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B231692B204F1C5A003BCD74 /* SuccessScene.sks */; };
 		B279734E1D606E6D00FE6313 /* Maze.swift in Sources */ = {isa = PBXBuildFile; fileRef = B279734D1D606E6D00FE6313 /* Maze.swift */; };
 		B27973501D60807F00FE6313 /* MazeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B279734F1D60807F00FE6313 /* MazeFactory.swift */; };
 		B27973531D6081AD00FE6313 /* MazeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27973521D6081AD00FE6313 /* MazeNode.swift */; };
@@ -83,6 +88,11 @@
 		B231691C204C0584003BCD74 /* MazeSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MazeSolver.swift; sourceTree = "<group>"; };
 		B231691E204C092E003BCD74 /* MazeSolverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MazeSolverTests.swift; sourceTree = "<group>"; };
 		B2316921204DAB53003BCD74 /* TimeIntervalExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalExtensionsTests.swift; sourceTree = "<group>"; };
+		B2316923204DC64C003BCD74 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
+		B2316925204DC6B1003BCD74 /* LevelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelTests.swift; sourceTree = "<group>"; };
+		B2316927204DC982003BCD74 /* GameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTests.swift; sourceTree = "<group>"; };
+		B2316929204F1BFC003BCD74 /* GameSceneSuccessState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneSuccessState.swift; sourceTree = "<group>"; };
+		B231692B204F1C5A003BCD74 /* SuccessScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SuccessScene.sks; sourceTree = "<group>"; };
 		B279734D1D606E6D00FE6313 /* Maze.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Maze.swift; sourceTree = "<group>"; };
 		B279734F1D60807F00FE6313 /* MazeFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MazeFactory.swift; sourceTree = "<group>"; };
 		B27973521D6081AD00FE6313 /* MazeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MazeNode.swift; sourceTree = "<group>"; };
@@ -205,6 +215,8 @@
 			isa = PBXGroup;
 			children = (
 				B2222FEF204BE40B0070F272 /* ArrayExtensionsTests.swift */,
+				B2316925204DC6B1003BCD74 /* LevelTests.swift */,
+				B2316927204DC982003BCD74 /* GameTests.swift */,
 				B2316921204DAB53003BCD74 /* TimeIntervalExtensionsTests.swift */,
 				B231691E204C092E003BCD74 /* MazeSolverTests.swift */,
 				B2C83CB21CD270F900975C75 /* Info.plist */,
@@ -249,6 +261,7 @@
 			children = (
 				B2C83C9B1CD270F900975C75 /* GameScene.swift */,
 				B2222FED204AB20F0070F272 /* Game.swift */,
+				B2316923204DC64C003BCD74 /* Level.swift */,
 				B2C83C991CD270F900975C75 /* GameScene.sks */,
 				B2D486D21F497CF500D82D1B /* GameScene + SKPhysicsContactDelegate.swift */,
 				B2D486E01F49EC2C00D82D1B /* States */,
@@ -290,6 +303,8 @@
 			children = (
 				B2D486C91F49797C00D82D1B /* GameSceneActiveState.swift */,
 				B2C154AB1F6714E9009A041C /* GameSceneOverlayState.swift */,
+				B2316929204F1BFC003BCD74 /* GameSceneSuccessState.swift */,
+				B231692B204F1C5A003BCD74 /* SuccessScene.sks */,
 			);
 			name = States;
 			sourceTree = "<group>";
@@ -406,6 +421,7 @@
 				B2C83C9A1CD270F900975C75 /* GameScene.sks in Resources */,
 				B2C83CA61CD270F900975C75 /* LaunchScreen.storyboard in Resources */,
 				B2C83CA31CD270F900975C75 /* Assets.xcassets in Resources */,
+				B231692C204F1C5A003BCD74 /* SuccessScene.sks in Resources */,
 				B2C83CA11CD270F900975C75 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -437,6 +453,7 @@
 				B2222FEE204AB20F0070F272 /* Game.swift in Sources */,
 				B231691D204C0584003BCD74 /* MazeSolver.swift in Sources */,
 				B2D486CE1F497C0600D82D1B /* ColliderType.swift in Sources */,
+				B231692A204F1BFC003BCD74 /* GameSceneSuccessState.swift in Sources */,
 				B2C83C9E1CD270F900975C75 /* GameViewController.swift in Sources */,
 				B2216FE21F372BE700576F36 /* Room.swift in Sources */,
 				B2D486C61F49577800D82D1B /* Direction.swift in Sources */,
@@ -453,6 +470,7 @@
 				B2D486E21F4CBDC600D82D1B /* PhysicsComponent.swift in Sources */,
 				B2D486DF1F49E0E600D82D1B /* Goal.swift in Sources */,
 				B27973501D60807F00FE6313 /* MazeFactory.swift in Sources */,
+				B2316924204DC64C003BCD74 /* Level.swift in Sources */,
 				B2C154A81F6712E0009A041C /* ButtonNode.swift in Sources */,
 				B2D486CA1F49797C00D82D1B /* GameSceneActiveState.swift in Sources */,
 				B2C154A61F671225009A041C /* BaseScene.swift in Sources */,
@@ -467,7 +485,9 @@
 			files = (
 				B2222FF0204BE40B0070F272 /* ArrayExtensionsTests.swift in Sources */,
 				B231691F204C092E003BCD74 /* MazeSolverTests.swift in Sources */,
+				B2316926204DC6B2003BCD74 /* LevelTests.swift in Sources */,
 				B2316922204DAB53003BCD74 /* TimeIntervalExtensionsTests.swift in Sources */,
+				B2316928204DC982003BCD74 /* GameTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

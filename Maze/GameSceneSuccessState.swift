@@ -6,4 +6,21 @@
 //  Copyright © 2018 Svante Dahlberg. All rights reserved.
 //
 
-import Foundation
+import SpriteKit
+import GameplayKit
+
+class GameSceneSuccessState: GameSceneOverlayState {
+    
+    override var overlaySceneFileName: String {
+        return "SuccessScene"
+    }
+    
+    override func didEnter(from previousState: GKState?) {
+        super.didEnter(from: previousState)
+        
+    }
+    
+    override func isValidNextState(_ stateClass: AnyClass) -> Bool {
+        return false
+    }
+}

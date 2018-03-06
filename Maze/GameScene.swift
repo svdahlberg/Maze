@@ -14,16 +14,15 @@ class GameScene: BaseScene {
     private var playerCamera: SKCameraNode!
     private let cameraScale: CGFloat = 0.25
     
-    lazy var game: Game = Game(mazeNode: mazeNode)
+    lazy var game: Game = Game(level: Level(number: 1))
     
-    private lazy var mazeNode: MazeNode = {
-        let mazeNode = MazeNode(color: .darkGray, roomSize: CGSize(width: 30, height: 30), dimensions: (cols: 10, rows: 10))
-        mazeNode.position = CGPoint(x: size.height/2, y: size.height/2)
-        return mazeNode
-    }()
+    private var mazeNode: MazeNode {
+        return game.mazeNode
+    }
     
     private lazy var stateMachine: GKStateMachine = GKStateMachine(states: [
-        GameSceneActiveState(game: game)
+        GameSceneActiveState(gameScene: self),
+        GameSceneSuccessState(gameScene: self)
         ])
     
     override func sceneDidLoad() {
@@ -36,6 +35,7 @@ class GameScene: BaseScene {
     
     override func didMove(to view: SKView) {
         super.didMove(to: view)
+        mazeNode.position = CGPoint(x: size.height/2, y: size.height/2)
         addChild(mazeNode)
         setupPlayerControls()
         setupCamera()

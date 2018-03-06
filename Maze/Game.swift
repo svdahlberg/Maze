@@ -13,14 +13,22 @@ import GameplayKit
 class Game {
     
     private var entities = Set<GKEntity>()
-    var mazeNode: MazeNode
+    
+    lazy var mazeNode: MazeNode = {
+        let mazeNode = MazeNode(color: .darkGray, roomSize: CGSize(width: 30, height: 30), dimensions: (cols: level.mazeDimensions.columns, rows: level.mazeDimensions.rows))
+        return mazeNode
+    }()
+    
     let player = Player()
+    
     lazy var goal: Goal? = {
         guard let goalRoom = mazeNode.deadEnds()?.last else { return nil }
         return Goal(room: goalRoom)
     }()
     
     var keys: [Key]?
+    
+    let level: Level
     
     var numberOfKeys: Int {
         guard let keys = keys else { return 0 }
@@ -39,11 +47,11 @@ class Game {
         }
     }
     
-    init(mazeNode: MazeNode) {
-        self.mazeNode = mazeNode
+    init(level: Level) {
+        self.level = level
         placePlayerInMaze()
         placeGoalInMaze()
-        placeKeysInMaze()
+//        placeKeysInMaze()
     }
     
     func update(with deltaTime: TimeInterval) {

@@ -12,16 +12,17 @@ import GameplayKit
 
 class GameSceneActiveState: GKState {
     
-    unowned let game: Game
+    unowned let gameScene: GameScene
     
-    init(game: Game) {
-        self.game = game
+    init(gameScene: GameScene) {
+        self.gameScene = gameScene
         super.init()
-        game.player.delegate = self
+        gameScene.game.player.delegate = self
     }
     
     override func didEnter(from previousState: GKState?) {
         super.didEnter(from: previousState)
+        
     }
     
     override func update(deltaTime seconds: TimeInterval) {
@@ -31,26 +32,24 @@ class GameSceneActiveState: GKState {
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
         switch stateClass {
-        default:
-            return false
+        case is GameSceneSuccessState.Type: return true
+        default: return false
         }
     }
 }
 
 extension GameSceneActiveState: PlayerDelegate {
     func playerDidReachGoal(_ goal: Goal) {
-        guard game.allKeysCollected else {
+        guard gameScene.game.allKeysCollected else {
             print("Need more keys")
-            // update UI
             return
         }
-        print("Success")
-        // Move to success state
+        
+        stateMachine?.enter(GameSceneSuccessState.self)
     }
     
     func playerDidCollectKey(_ key: Key) {
         print("Key collected")
-        // update UI
     }
 }
 
