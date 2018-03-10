@@ -79,7 +79,7 @@ class Game {
     private var roomsWithKeys: [Room] {
         guard let deadEnds = mazeNode.deadEnds() else { return [] }
         let possibleKeyRooms = Array(deadEnds.dropLast().dropFirst())
-        return possibleKeyRooms[randomPick: 3]
+        return possibleKeyRooms[randomPick: level.numberOfKeys]
     }
     
     private func placeKeysInMaze() {
