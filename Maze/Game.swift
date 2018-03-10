@@ -12,7 +12,7 @@ import GameplayKit
 
 class Game {
     
-    private var entities = Set<GKEntity>()
+    private(set) var entities = Set<GKEntity>()
     
     lazy var mazeNode = MazeNode(color: .darkGray, roomSize: CGSize(width: 30, height: 30), dimensions: level.mazeDimensions)
     

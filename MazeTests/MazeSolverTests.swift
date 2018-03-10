@@ -12,7 +12,7 @@ import XCTest
 class MazeSolverTests: XCTestCase {
     
     func testSolveReturnsPathToTravelInToSolveTheMaze() {
-        let maze = Maze(width: 2, height: 2)
+        let maze = Maze(dimensions: MazeDimensions(rows: 2, columns: 2))
         let startRoom = maze.matrix[0][0]
         let endRoom = maze.matrix[1][1]
         let mazeSolver = MazeSolver(maze: maze, start: startRoom, end: endRoom)
