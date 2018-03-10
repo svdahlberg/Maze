@@ -17,10 +17,12 @@ protocol PlayerDelegate: class {
 class Player: GKEntity {
     
     var movementDirection: Direction?
+    var isControllable: Bool = true
+    weak var delegate: PlayerDelegate?
+    
     private let movementSpeed: CGFloat = 200
     private let moveActionKey = "MovePlayer"
     
-    weak var delegate: PlayerDelegate?
     
     override init() {
         super.init()
@@ -47,6 +49,7 @@ class Player: GKEntity {
     }
     
     func move(inDirection direction: Direction, inMazeNode mazeNode: MazeNode) {
+        guard isControllable else { return }
         guard let playerNode = component(ofType: SpriteComponent.self)?.node else { return }
         var possibleDirectionsToTravelIn = mazeNode.possibleDirectionsToTravelIn()
         if let movementDirection = movementDirection {

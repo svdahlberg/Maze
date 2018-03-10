@@ -25,6 +25,7 @@ class SceneOverlay {
         backgroundNode.addChild(contentNode)
         contentNode.color = .clear
         nativeContentSize = contentNode.size
+        contentNode.isPaused = false
     }
     
     func updateScale() {

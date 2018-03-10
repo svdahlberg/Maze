@@ -23,13 +23,18 @@ class ButtonNode: SKSpriteNode {
         }
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+        super.init(texture: texture, color: color, size: size)
+        setup()
     }
     
-    private func buttonTriggered() {
-        guard isUserInteractionEnabled else { return }
-        action?()
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        isUserInteractionEnabled = true
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -41,17 +46,18 @@ class ButtonNode: SKSpriteNode {
         super.touchesEnded(touches, with: event)
         isHighlighted = false
         if contains(touches: touches) {
-            buttonTriggered()
+            action?()
         }
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesCancelled(touches, with: event)
         isHighlighted = false
+        
     }
     
     private func contains(touches: Set<UITouch>) -> Bool {
-        guard let scene = scene else { fatalError("Button must be used within a scene.") }
+        guard let scene = scene else { return false }
         
         return touches.contains { touch in
             let touchPoint = touch.location(in: scene)
@@ -59,6 +65,7 @@ class ButtonNode: SKSpriteNode {
             return touchedNode === self || touchedNode.inParentHierarchy(self)
         }
     }
+  
 }
 
 

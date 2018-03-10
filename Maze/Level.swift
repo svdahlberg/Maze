@@ -12,7 +12,7 @@ struct Level {
     let number: Int
     
     var mazeDimensions: (rows: Int, columns: Int) {
-        return (rows: number + 2 * 2, columns: number + 2 * 2)
+        return (rows: number + 2, columns: number + 2)
     }
     
 }

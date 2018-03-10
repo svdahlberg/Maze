@@ -29,12 +29,18 @@ class GameSceneOverlayState: GKState {
         
         gameScene.overlay = overlay
         
+        gameScene.game.player.isControllable = false
+        gameScene.isUserInteractionEnabled = false
+        
     }
     
     override func willExit(to nextState: GKState) {
         super.willExit(to: nextState)
         
         gameScene.overlay = nil
+        
+        gameScene.game.player.isControllable = true
+        gameScene.isUserInteractionEnabled = true
         
     }
     
