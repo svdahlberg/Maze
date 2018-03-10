@@ -8,19 +8,25 @@
 
 import Foundation
 
+struct MazeDimensions {
+    let rows: Int
+    let columns: Int
+}
+
 class Maze {
-    let width: Int
-    let height: Int
+    let dimensions: MazeDimensions
     var matrix: [[Room]]
     var currentRoom: Room
     
-    init(width: Int, height: Int) {
-        self.width = width
-        self.height = height
+    var rows: Int { return dimensions.rows }
+    var columns: Int { return dimensions.columns }
+    
+    init(dimensions: MazeDimensions) {
+        self.dimensions = dimensions
 
-        matrix = [[Room]](repeating: [Room](repeating: Room(x: 0, y: 0), count: height), count: width)
-        for i in 0...width - 1 {
-            for j in 0...height - 1 {
+        matrix = [[Room]](repeating: [Room](repeating: Room(x: 0, y: 0), count: dimensions.columns), count: dimensions.rows)
+        for i in 0...dimensions.columns - 1 {
+            for j in 0...dimensions.rows - 1 {
                 matrix[i][j] = Room(x: i, y: j)
             }
         }
@@ -49,8 +55,8 @@ class Maze {
         var currentRoom = room
         switch direction {
         case .right:
-            for col in room.x...width - 1 {
-                guard col + 1 < width else { return currentRoom }
+            for col in room.x...rows - 1 {
+                guard col + 1 < rows else { return currentRoom }
                 let nextRoom = matrix[col + 1][room.y]
                 if let roomToStopIn = roomToStopIn(currentRoom: currentRoom, nextRoom: nextRoom) {
                     return roomToStopIn
@@ -68,8 +74,8 @@ class Maze {
             }
 
         case .down:
-            for row in room.y...height - 1 {
-                guard row + 1 < height else { return currentRoom }
+            for row in room.y...columns - 1 {
+                guard row + 1 < columns else { return currentRoom }
                 let nextRoom = matrix[room.x][row + 1]
                 if let roomToStopIn = roomToStopIn(currentRoom: currentRoom, nextRoom: nextRoom) {
                     return roomToStopIn
@@ -111,8 +117,8 @@ class Maze {
 
     func deadEnds() -> [Room]? {
         var deadEndedRooms = [Room]()
-        for i in 0...width - 1 {
-            for j in 0...height - 1 {
+        for i in 0...rows - 1 {
+            for j in 0...columns - 1 {
                 let room = matrix[i][j]
                 if room.walls.count > 2 {
                     deadEndedRooms.append(room)
@@ -124,8 +130,8 @@ class Maze {
 
 
     private func createWalls() {
-        for row in 0...width - 1 {
-            for col in 0...height - 1 {
+        for row in 0...rows - 1 {
+            for col in 0...columns - 1 {
                 let room = matrix[row][col]
                 for adjacentRoom in adjacentRooms(of: room) {
                     room.walls.append(Wall(room1: room, room2: adjacentRoom))
@@ -147,14 +153,14 @@ class Maze {
     }
 
     private func isOuterWall(col: Int, row: Int) -> Bool {
-        return col == 0 || col == height - 1 || row == 0 || row == width - 1
+        return col == 0 || col == columns - 1 || row == 0 || row == rows - 1
     }
 
     private func isCornerWall(col: Int, row: Int) -> Bool {
         return (col == 0 && row == 0) ||
-            (col == 0 && row == width - 1) ||
-            (col == height - 1 && row == 0) ||
-            (col == height - 1 && row == width - 1)
+            (col == 0 && row == rows - 1) ||
+            (col == columns - 1 && row == 0) ||
+            (col == columns - 1 && row == rows - 1)
     }
 
     private func removeWalls() {
@@ -188,10 +194,10 @@ class Maze {
 
     private func adjacentRooms(of room: Room) -> [Room] {
         var rooms = [Room]()
-        if room.x + 1 < width {
+        if room.x + 1 < rows {
             rooms.append(matrix[room.x + 1][room.y])
         }
-        if room.y + 1 < height {
+        if room.y + 1 < columns {
             rooms.append(matrix[room.x][room.y + 1])
         }
         if room.x - 1 >= 0 {

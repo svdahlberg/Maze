@@ -23,6 +23,7 @@ class GameSceneActiveState: GKState {
     override func didEnter(from previousState: GKState?) {
         super.didEnter(from: previousState)
         
+        setupPlayerCamera()
     }
     
     override func update(deltaTime seconds: TimeInterval) {
@@ -35,6 +36,12 @@ class GameSceneActiveState: GKState {
         case is GameSceneSuccessState.Type: return true
         default: return false
         }
+    }
+    
+    private func setupPlayerCamera() {
+        guard let playerNode = gameScene.game.player.component(ofType: SpriteComponent.self)?.node else { return }
+        gameScene.playerCamera.constraints = [SKConstraint.distance(SKRange(constantValue: 0), to: playerNode)]
+        gameScene.playerCamera.setScale(gameScene.cameraScale)
     }
 }
 

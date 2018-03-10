@@ -18,20 +18,20 @@ class MazeNode: SKSpriteNode {
         }
     }
     
-    init(color: UIColor, size: CGSize, dimensions: (cols: Int, rows: Int)) {
-        maze = Maze(width: dimensions.cols, height: dimensions.rows)
-        roomSize = CGSize(width: size.width/CGFloat(maze.width), height: size.height/CGFloat(maze.height))
+    init(color: UIColor, size: CGSize, dimensions: MazeDimensions) {
+        maze = Maze(dimensions: dimensions)
+        roomSize = CGSize(width: size.width/CGFloat(maze.dimensions.rows), height: size.height/CGFloat(maze.dimensions.columns))
         currentRoom = maze.currentRoom
         super.init(texture: nil, color: color, size: size)
         anchorPoint = CGPoint(x: 0, y: 1)
         addRooms()
     }
     
-    init(color: UIColor, roomSize: CGSize, dimensions: (cols: Int, rows: Int)) {
-        maze = Maze(width: dimensions.cols, height: dimensions.rows)
+    init(color: UIColor, roomSize: CGSize, dimensions: MazeDimensions) {
+        maze = Maze(dimensions: dimensions)
         self.roomSize = roomSize
         currentRoom = maze.currentRoom
-        let mazeSize = CGSize(width: CGFloat(maze.width) * roomSize.width, height: CGFloat(maze.height) * roomSize.height)
+        let mazeSize = CGSize(width: CGFloat(maze.rows) * roomSize.width, height: CGFloat(maze.columns) * roomSize.height)
         super.init(texture: nil, color: color, size: mazeSize)
         anchorPoint = CGPoint(x: 0, y: 1)
         addRooms()
@@ -46,8 +46,8 @@ class MazeNode: SKSpriteNode {
     }
     
     private func addRooms() {
-        for i in 0...maze.width - 1 {
-            for j in 0...maze.height - 1 {
+        for i in 0...maze.rows - 1 {
+            for j in 0...maze.columns - 1 {
                 let room = maze.matrix[i][j]
                 let roomNode = RoomNode(texture: nil, color: SKColor.clear, size: roomSize, room: room, maze: maze)
                 roomNode.position = position(forRoom: room)

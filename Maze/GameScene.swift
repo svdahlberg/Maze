@@ -11,16 +11,27 @@ import GameplayKit
 
 class GameScene: BaseScene {
     private var lastUpdateTime: TimeInterval = 0
-    private var playerCamera: SKCameraNode!
-    private let cameraScale: CGFloat = 0.25
+    var playerCamera: SKCameraNode
+    let cameraScale: CGFloat = 0.25
     
-    lazy var game: Game = Game(level: Level(number: 1))
+    let game: Game
+    
+    init(size: CGSize, level: Level) {
+        game = Game(level: level)
+        playerCamera = SKCameraNode()
+        super.init(size: size)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     private var mazeNode: MazeNode {
         return game.mazeNode
     }
     
     private lazy var stateMachine: GKStateMachine = GKStateMachine(states: [
+        GameSceneIntroState(gameScene: self),
         GameSceneActiveState(gameScene: self),
         GameSceneSuccessState(gameScene: self)
         ])
@@ -39,78 +50,14 @@ class GameScene: BaseScene {
         addChild(mazeNode)
         setupPlayerControls()
         setupCamera()
-        stateMachine.enter(GameSceneActiveState.self)
+        stateMachine.enter(GameSceneIntroState.self)
     }
-    
-    private func setupPlayerControls() {
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe))
-        swipeRight.direction = .right
-        view?.addGestureRecognizer(swipeRight)
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe))
-        swipeLeft.direction = .left
-        view?.addGestureRecognizer(swipeLeft)
-        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe))
-        swipeUp.direction = .up
-        view?.addGestureRecognizer(swipeUp)
-        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe))
-        swipeDown.direction = .down
-        view?.addGestureRecognizer(swipeDown)
-    }
-    
+ 
     // MARK: Camera
     
     private func setupCamera() {
-        playerCamera = SKCameraNode()
         addChild(playerCamera)
         camera = playerCamera
-        showGoalAndMap() { self.setupPlayerCamera() }
-    }
-    
-    private func showGoalAndMap(completion: @escaping () -> Void) {
-        guard let goal = game.goal,
-            let goalNode = goal.component(ofType: SpriteComponent.self)?.node,
-            let playerNode = game.player.component(ofType: SpriteComponent.self)?.node
-        else { return }
-        
-        let goalPosition = convert(goalNode.position, from: mazeNode)
-        let playerPosition = convert(playerNode.position, from: mazeNode)
-        
-        playerCamera.position = goalPosition
-        playerCamera.setScale(cameraScale)
-        
-        let zoomOutAction = SKAction.scale(to: 2, duration: 2)
-        zoomOutAction.timingMode = .easeOut
-        let moveToPlayerAction = SKAction.move(to: playerPosition, duration: 3)
-        moveToPlayerAction.timingMode = .easeInEaseOut
-        let zoomInAction = SKAction.scale(to: cameraScale, duration: 1)
-        zoomInAction.timingMode = .easeIn
-        
-        let lightNode = SKLightNode()
-        playerCamera.addChild(lightNode)
-        let path = MazeSolver(maze: mazeNode.maze, start: goal.room, end: mazeNode.maze.currentRoom).solve()
-        let roomPath = path!.rooms()
-        let positionPath = roomPath.map { mazeNode.position(forRoom: $0) }
-        
-        var previousPoint = goalPosition
-        let pathActions = positionPath.map { (position: CGPoint) -> SKAction in
-            let point = convert(position, from: mazeNode)
-            let action = SKAction.move(to: point, duration: TimeInterval.duration(toMoveFrom: previousPoint, to: point, with: 200))
-            previousPoint = point
-            return action
-        }
-        
-        let actionSequence = SKAction.sequence([zoomOutAction, SKAction.sequence(pathActions), zoomInAction])
-        
-        playerCamera.run(actionSequence) {
-            lightNode.removeFromParent()
-            completion()
-        }
-    }
-    
-    private func setupPlayerCamera() {
-        guard let playerNode = game.player.component(ofType: SpriteComponent.self)?.node else { return }
-        playerCamera.constraints = [SKConstraint.distance(SKRange(constantValue: 0), to: playerNode)]
-        playerCamera.setScale(cameraScale)
     }
     
     // MARK: Update
@@ -139,6 +86,22 @@ class GameScene: BaseScene {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         touches.forEach { _ in playerCamera.setScale(cameraScale) }
+    }
+    
+    
+    private func setupPlayerControls() {
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe))
+        swipeRight.direction = .right
+        view?.addGestureRecognizer(swipeRight)
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe))
+        swipeLeft.direction = .left
+        view?.addGestureRecognizer(swipeLeft)
+        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe))
+        swipeUp.direction = .up
+        view?.addGestureRecognizer(swipeUp)
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe))
+        swipeDown.direction = .down
+        view?.addGestureRecognizer(swipeDown)
     }
     
     @objc private func handleSwipe(_ gesture: UISwipeGestureRecognizer) -> Void {

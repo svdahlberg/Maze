@@ -14,55 +14,57 @@ class Game {
     
     private var entities = Set<GKEntity>()
     
-    lazy var mazeNode: MazeNode = {
-        let mazeNode = MazeNode(color: .darkGray, roomSize: CGSize(width: 30, height: 30), dimensions: (cols: level.mazeDimensions.columns, rows: level.mazeDimensions.rows))
-        return mazeNode
-    }()
+    lazy var mazeNode = MazeNode(color: .darkGray, roomSize: CGSize(width: 30, height: 30), dimensions: level.mazeDimensions)
     
-    let player = Player()
-    
-    lazy var goal: Goal? = {
-        guard let goalRoom = mazeNode.deadEnds()?.last else { return nil }
-        return Goal(room: goalRoom)
-    }()
-    
-    var keys: [Key]?
+    let player: Player
     
     let level: Level
     
+    lazy var goal: Goal? = {
+        guard let goalRoom = goalRoom else { return nil }
+        return Goal(room: goalRoom)
+    }()
+    
+    lazy var keys: [Key] = roomsWithKeys.map { Key(room: $0) }
+    
+    init(level: Level) {
+        self.level = level
+        self.player = Player()
+        
+        placePlayerInMaze()
+        placeGoalInMaze()
+        placeKeysInMaze()
+    }
+    
     var numberOfKeys: Int {
-        guard let keys = keys else { return 0 }
         return keys.count
     }
     
     var numberOfCollectedKeys: Int {
-        guard let keys = keys else { return 0 }
         return keys.filter { $0.collected }.count
     }
     
     var allKeysCollected: Bool {
-        guard let keys = keys else { return true }
-        return !keys.contains { key in
-            return !key.collected
-        }
-    }
-    
-    init(level: Level) {
-        self.level = level
-        placePlayerInMaze()
-        placeGoalInMaze()
-//        placeKeysInMaze()
+        return !keys.contains { !$0.collected }
     }
     
     func update(with deltaTime: TimeInterval) {
         entities.forEach { $0.update(deltaTime: deltaTime) }
     }
     
+    private var playerStartingRoom: Room {
+        return mazeNode.maze.currentRoom
+    }
+    
     private func placePlayerInMaze() {
         guard let playerNode = player.component(ofType: SpriteComponent.self)?.node else { return }
-        playerNode.position = mazeNode.positionForCurrentRoom()
+        playerNode.position = mazeNode.position(forRoom: playerStartingRoom)
         mazeNode.addChild(playerNode)
         entities.insert(player)
+    }
+    
+    private var goalRoom: Room? {
+        return mazeNode.deadEnds()?.last
     }
     
     private func placeGoalInMaze() {
@@ -74,18 +76,19 @@ class Game {
         entities.insert(goal)
     }
     
-    private func placeKeysInMaze() {
-        guard let deadEnds = mazeNode.deadEnds() else { return }
+    private var roomsWithKeys: [Room] {
+        guard let deadEnds = mazeNode.deadEnds() else { return [] }
         let possibleKeyRooms = Array(deadEnds.dropLast().dropFirst())
-        let keyRooms = possibleKeyRooms[randomPick: 3]
-        keys = keyRooms.map { (room: Room) -> Key in
-            let key = Key()
+        return possibleKeyRooms[randomPick: 3]
+    }
+    
+    private func placeKeysInMaze() {
+        keys.forEach { key in
             if let keyNode = key.component(ofType: SpriteComponent.self)?.node {
-                keyNode.position = mazeNode.position(forRoom: room)
+                keyNode.position = mazeNode.position(forRoom: key.room)
                 mazeNode.addChild(keyNode)
+                entities.insert(key)
             }
-            entities.insert(key)
-            return key
         }
     }
 

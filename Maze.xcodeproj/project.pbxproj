@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B207C144205401E100463375 /* GameSceneIntroState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B207C143205401E100463375 /* GameSceneIntroState.swift */; };
 		B2216FE21F372BE700576F36 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2216FE11F372BE700576F36 /* Room.swift */; };
 		B2216FE41F372C0800576F36 /* Wall.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2216FE31F372C0800576F36 /* Wall.swift */; };
 		B2216FE61F372C3900576F36 /* RoomNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2216FE51F372C3900576F36 /* RoomNode.swift */; };
@@ -80,6 +81,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B207C143205401E100463375 /* GameSceneIntroState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneIntroState.swift; sourceTree = "<group>"; };
 		B2216FE11F372BE700576F36 /* Room.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 		B2216FE31F372C0800576F36 /* Wall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wall.swift; sourceTree = "<group>"; };
 		B2216FE51F372C3900576F36 /* RoomNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomNode.swift; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 		B2D486E01F49EC2C00D82D1B /* States */ = {
 			isa = PBXGroup;
 			children = (
+				B207C143205401E100463375 /* GameSceneIntroState.swift */,
 				B2D486C91F49797C00D82D1B /* GameSceneActiveState.swift */,
 				B2C154AB1F6714E9009A041C /* GameSceneOverlayState.swift */,
 				B2316929204F1BFC003BCD74 /* GameSceneSuccessState.swift */,
@@ -472,6 +475,7 @@
 				B27973501D60807F00FE6313 /* MazeFactory.swift in Sources */,
 				B2316924204DC64C003BCD74 /* Level.swift in Sources */,
 				B2C154A81F6712E0009A041C /* ButtonNode.swift in Sources */,
+				B207C144205401E100463375 /* GameSceneIntroState.swift in Sources */,
 				B2D486CA1F49797C00D82D1B /* GameSceneActiveState.swift in Sources */,
 				B2C154A61F671225009A041C /* BaseScene.swift in Sources */,
 				B2D486DD1F49DDE200D82D1B /* Player.swift in Sources */,

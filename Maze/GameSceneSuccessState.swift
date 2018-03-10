@@ -30,8 +30,10 @@ class GameSceneSuccessState: GameSceneOverlayState {
     }
     
     private func presentNextLevelGameScene() {
-        guard let scene = GameScene(fileNamed: "GameScene"),
-            let view = gameScene.view else { return }
+        let nextLevel = gameScene.game.level.number + 1
+        let scene = GameScene(size: gameScene.size, level: Level(number: nextLevel))
+        
+        guard let view = gameScene.view else { return }
         view.ignoresSiblingOrder = true
         scene.scaleMode = .aspectFill
         let transition = SKTransition.reveal(with: .down, duration: 1)

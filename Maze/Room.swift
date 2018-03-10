@@ -38,10 +38,10 @@ class Room: Equatable {
         if y == 0 {
             return .top
         }
-        else if x == maze.width - 1 {
+        else if x == maze.dimensions.rows - 1 {
             return .right
         }
-        else if y == maze.height - 1 {
+        else if y == maze.dimensions.columns - 1 {
             return .bottom
         }
         return nil
@@ -51,13 +51,13 @@ class Room: Equatable {
         if x == 0, y == 0 {
             return [.left, .top]
         }
-        if x == maze.width - 1, y == 0 {
+        if x == maze.dimensions.rows - 1, y == 0 {
             return [.top, .right]
         }
-        if x == 0, y == maze.height - 1 {
+        if x == 0, y == maze.dimensions.columns - 1 {
             return [.left, .bottom]
         }
-        if x == maze.width - 1, y == maze.height - 1 {
+        if x == maze.dimensions.rows - 1, y == maze.dimensions.columns - 1 {
             return [.bottom, .right]
         }
         return []

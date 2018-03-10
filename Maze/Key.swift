@@ -12,6 +12,8 @@ import GameplayKit
 
 class Key: GKEntity {
     
+    let room: Room
+    
     var collected: Bool = false {
         didSet {
             guard let node = component(ofType: SpriteComponent.self)?.node else { return }
@@ -19,7 +21,10 @@ class Key: GKEntity {
         }
     }
     
-    override init() {
+    init(room: Room) {
+        
+        self.room = room
+        
         super.init()
         
         ColliderType.definedCollisions[.key] = []
