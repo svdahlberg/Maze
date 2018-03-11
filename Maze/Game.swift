@@ -20,12 +20,12 @@ class Game {
     
     let level: Level
     
-    lazy var goal: Goal? = {
+    private(set) lazy var goal: Goal? = {
         guard let goalRoom = goalRoom else { return nil }
         return Goal(room: goalRoom)
     }()
     
-    lazy var keys: [Key] = roomsWithKeys.map { Key(room: $0) }
+    private(set) lazy var keys: [Key] = roomsWithKeys.map { Key(room: $0) }
     
     init(level: Level) {
         self.level = level
@@ -43,6 +43,17 @@ class Game {
     var allKeysCollected: Bool {
         return !keys.contains { !$0.collected }
     }
+
+    lazy var mazeSolver: MazeSolver? = {
+        guard let goalRoom = goalRoom else { return nil }
+        let mazeSolver = MazeSolver(maze: mazeNode.maze, start: playerStartingRoom, end: goalRoom)
+        return mazeSolver
+    }()
+    
+    private(set) lazy var numberOfMovesFromStartToGoal: Int? = {
+        let path = mazeSolver?.solve()
+        return path?.rooms().count
+    }()
     
     func update(with deltaTime: TimeInterval) {
         entities.forEach { $0.update(deltaTime: deltaTime) }

@@ -26,6 +26,7 @@
 		B29075EB2054480F007A2D44 /* GameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29075EA2054480F007A2D44 /* GameTests.swift */; };
 		B29075EE205509F7007A2D44 /* LevelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29075ED205509F7007A2D44 /* LevelMock.swift */; };
 		B29075F020550A00007A2D44 /* MazeNodeMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29075EF20550A00007A2D44 /* MazeNodeMock.swift */; };
+		B29075F220552F4E007A2D44 /* MazeSolverMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29075F120552F4E007A2D44 /* MazeSolverMock.swift */; };
 		B2C154A21F657554009A041C /* ClassExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C154A11F657554009A041C /* ClassExtensions.swift */; };
 		B2C154A41F657831009A041C /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C154A31F657831009A041C /* Key.swift */; };
 		B2C154A61F671225009A041C /* BaseScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C154A51F671225009A041C /* BaseScene.swift */; };
@@ -102,6 +103,7 @@
 		B29075EA2054480F007A2D44 /* GameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTests.swift; sourceTree = "<group>"; };
 		B29075ED205509F7007A2D44 /* LevelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelMock.swift; sourceTree = "<group>"; };
 		B29075EF20550A00007A2D44 /* MazeNodeMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MazeNodeMock.swift; sourceTree = "<group>"; };
+		B29075F120552F4E007A2D44 /* MazeSolverMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MazeSolverMock.swift; sourceTree = "<group>"; };
 		B2C154A11F657554009A041C /* ClassExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassExtensions.swift; sourceTree = "<group>"; };
 		B2C154A31F657831009A041C /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
 		B2C154A51F671225009A041C /* BaseScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseScene.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 			children = (
 				B29075ED205509F7007A2D44 /* LevelMock.swift */,
 				B29075EF20550A00007A2D44 /* MazeNodeMock.swift */,
+				B29075F120552F4E007A2D44 /* MazeSolverMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -502,6 +505,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2222FF0204BE40B0070F272 /* ArrayExtensionsTests.swift in Sources */,
+				B29075F220552F4E007A2D44 /* MazeSolverMock.swift in Sources */,
 				B231691F204C092E003BCD74 /* MazeSolverTests.swift in Sources */,
 				B29075EE205509F7007A2D44 /* LevelMock.swift in Sources */,
 				B2316926204DC6B2003BCD74 /* LevelTests.swift in Sources */,

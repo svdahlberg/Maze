@@ -14,9 +14,9 @@ class MazeNodeMock: MazeNode {
     
     private let numberOfDeadEnds: Int
     
-    init(numberOfDeadEnds: Int) {
+    init(numberOfDeadEnds: Int, dimensions: MazeDimensions = MazeDimensions(rows: 5, columns: 5)) {
         self.numberOfDeadEnds = numberOfDeadEnds
-        super.init(color: .clear, roomSize: CGSize(width: 1, height: 1), dimensions: MazeDimensions(rows: 5, columns: 5))
+        super.init(color: .clear, roomSize: CGSize(width: 1, height: 1), dimensions: dimensions)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -31,4 +31,5 @@ class MazeNodeMock: MazeNode {
         
         return rooms.isEmpty ? nil : rooms
     }
+    
 }

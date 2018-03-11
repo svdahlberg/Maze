@@ -9,11 +9,17 @@
 import Foundation
 
 
-struct MazeSolver {
+class MazeSolver {
     
     let maze: Maze
     let start: Room
     let end: Room
+    
+    init(maze: Maze, start: Room, end: Room) {
+        self.maze = maze
+        self.start = start
+        self.end = end
+    }
     
     func solve() -> Path? {
         var frontier = [Path(to: start)]
