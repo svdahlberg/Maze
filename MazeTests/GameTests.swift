@@ -175,5 +175,16 @@ class GameTests: XCTestCase {
         XCTAssertEqual(sut.numberOfMovesFromStartToGoal, mazeSolverMock.solve()?.rooms().count)
     }
     
+    func testNumberOfMovesLeft_withNumberOfMovesFromStartToGoalNotNilAndNumberOFMovesByPlayerZero_shouldReturnNumberOfMovesFromStartToGoal() {
+        let mazeSolverMock = MazeSolverMock()
+        sut.mazeSolver = mazeSolverMock
+        XCTAssertEqual(sut.numberOfMovesLeft!, mazeSolverMock.solve()?.rooms().count)
+    }
     
+    func testNumberOfMovesLeft_withNumberOfMovesFromStartToGoalNotNilAndNumberOFMovesByPlayerNotZero_shouldReturnNumberOfMovesFromStartToGoalMinusNumberOFMovesMadeByPlayer() {
+        let mazeSolverMock = MazeSolverMock()
+        sut.mazeSolver = mazeSolverMock
+        sut.player.move(inDirection: sut.mazeNode.possibleDirectionsToTravelIn().first!, inMazeNode: sut.mazeNode)
+        XCTAssertEqual(sut.numberOfMovesLeft!, (mazeSolverMock.solve()?.rooms().count)! - 1)
+    }
 }

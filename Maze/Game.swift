@@ -50,6 +50,11 @@ class Game {
         return mazeSolver
     }()
     
+    var numberOfMovesLeft: Int? {
+        guard let numberOfMovesFromStartToGoal = numberOfMovesFromStartToGoal else { return nil }
+        return numberOfMovesFromStartToGoal - player.numberOfMovesMade
+    }
+    
     private(set) lazy var numberOfMovesFromStartToGoal: Int? = {
         let path = mazeSolver?.solve()
         return path?.rooms().count
