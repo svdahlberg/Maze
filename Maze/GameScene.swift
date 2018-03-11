@@ -14,6 +14,7 @@ class GameScene: BaseScene {
     var playerCamera: SKCameraNode
     let cameraScale: CGFloat = 0.25
     
+    
     let game: Game
     
     init(size: CGSize, level: Level) {
@@ -26,9 +27,7 @@ class GameScene: BaseScene {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private var mazeNode: MazeNode {
-        return game.mazeNode
-    }
+    private var mazeNode: MazeNode { return game.mazeNode }
     
     private lazy var stateMachine: GKStateMachine = GKStateMachine(states: [
         GameSceneIntroState(gameScene: self),
