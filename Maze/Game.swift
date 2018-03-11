@@ -30,10 +30,6 @@ class Game {
     init(level: Level) {
         self.level = level
         self.player = Player()
-        
-        placePlayerInMaze()
-        placeGoalInMaze()
-        placeKeysInMaze()
     }
     
     var numberOfKeys: Int {
@@ -51,23 +47,15 @@ class Game {
     func update(with deltaTime: TimeInterval) {
         entities.forEach { $0.update(deltaTime: deltaTime) }
     }
-    
-    private var playerStartingRoom: Room {
-        return mazeNode.maze.currentRoom
-    }
-    
-    private func placePlayerInMaze() {
+
+    func placePlayerInMaze() {
         guard let playerNode = player.component(ofType: SpriteComponent.self)?.node else { return }
         playerNode.position = mazeNode.position(forRoom: playerStartingRoom)
         mazeNode.addChild(playerNode)
         entities.insert(player)
     }
     
-    private var goalRoom: Room? {
-        return mazeNode.deadEnds()?.last
-    }
-    
-    private func placeGoalInMaze() {
+    func placeGoalInMaze() {
         guard let goal = goal,
             let goalNode = goal.component(ofType: SpriteComponent.self)?.node
             else { return }
@@ -76,13 +64,7 @@ class Game {
         entities.insert(goal)
     }
     
-    private var roomsWithKeys: [Room] {
-        guard let deadEnds = mazeNode.deadEnds() else { return [] }
-        let possibleKeyRooms = Array(deadEnds.dropLast().dropFirst())
-        return possibleKeyRooms[randomPick: level.numberOfKeys]
-    }
-    
-    private func placeKeysInMaze() {
+    func placeKeysInMaze() {
         keys.forEach { key in
             if let keyNode = key.component(ofType: SpriteComponent.self)?.node {
                 keyNode.position = mazeNode.position(forRoom: key.room)
@@ -90,6 +72,20 @@ class Game {
                 entities.insert(key)
             }
         }
+    }
+    
+    private var playerStartingRoom: Room {
+        return mazeNode.maze.currentRoom
+    }
+    
+    private var goalRoom: Room? {
+        return mazeNode.deadEnds()?.last
+    }
+    
+    private var roomsWithKeys: [Room] {
+        guard let deadEnds = mazeNode.deadEnds() else { return [] }
+        let possibleKeyRooms = Array(deadEnds.dropLast().dropFirst())
+        return possibleKeyRooms[randomPick: level.numberOfKeys]
     }
 
 }

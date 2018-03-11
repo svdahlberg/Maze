@@ -39,9 +39,60 @@ class GameTests: XCTestCase {
         XCTAssertEqual(goal?.room, lastDeadEndInMaze)
     }
     
-    // MARK: init
+    // MARK: keys
     
-    func testInit_shouldSetPositionOfPlayerToPositionOfCurrentRoomOfMaze() {
+    func testKeys_withMazeNodeWithTwoMoreDeadEndsThanKeysInLevel_shouldReturnNumberOfKeysInLevel() {
+        sut = Game(level: LevelMock(number: 3, numberOfKeys: 3))
+        sut.mazeNode = MazeNodeMock(numberOfDeadEnds: 5)
+        let keys = sut.keys
+        XCTAssertEqual(keys.count, 3)
+    }
+    
+    func testKeys_withMazeNodeWithOneMoreDeadEndThanKeysInLevel_shouldReturnOneLessKeyThanInLevel() {
+        sut = Game(level: LevelMock(number: 1, numberOfKeys: 3))
+        sut.mazeNode = MazeNodeMock(numberOfDeadEnds: 4)
+        let keys = sut.keys
+        XCTAssertEqual(keys.count, 2)
+    }
+    
+    func testKeys_withMazeNodeWithOnlyTwoDeadEnds_shouldReturnZeroKeys() {
+        sut = Game(level: LevelMock(number: 1, numberOfKeys: 3))
+        sut.mazeNode = MazeNodeMock(numberOfDeadEnds: 2)
+        let keys = sut.keys
+        XCTAssertEqual(keys.count, 0)
+    }
+    
+    func testNumberOfKeys_shouldReturnCountOfKeys() {
+        sut = Game(level: LevelMock(number: 1, numberOfKeys: 3))
+        sut.mazeNode = MazeNodeMock(numberOfDeadEnds: 4)
+        XCTAssertEqual(sut.numberOfKeys, 2)
+    }
+
+    func testNumberOfCollectedKeys_shouldReturnNumberOfKeysWithPropertyCollectedSetToTrue() {
+        sut = Game(level: LevelMock(number: 1, numberOfKeys: 3))
+        sut.mazeNode = MazeNodeMock(numberOfDeadEnds: 5)
+        sut.keys.first?.collected = true
+        XCTAssertEqual(sut.numberOfCollectedKeys, 1)
+    }
+    
+    func testAllKeysCollected_shouldReturnTrueIfAllKeysHavePropertyCollectedSetToTrue() {
+        sut = Game(level: LevelMock(number: 1, numberOfKeys: 3))
+        sut.mazeNode = MazeNodeMock(numberOfDeadEnds: 5)
+        sut.keys.forEach { $0.collected = true }
+        XCTAssertTrue(sut.allKeysCollected)
+    }
+    
+    func testAllKeysCollected_shouldReturnFalseIfNotAllKeysHavePropertyCollectedSetToTrue() {
+        sut = Game(level: LevelMock(number: 1, numberOfKeys: 3))
+        sut.mazeNode = MazeNodeMock(numberOfDeadEnds: 5)
+        sut.keys.first?.collected = true
+        XCTAssertFalse(sut.allKeysCollected)
+    }
+    
+    // MARK: placePlayerInMaze
+    
+    func testPlacePlayerInMaze_shouldSetPositionOfPlayerToPositionOfCurrentRoomOfMaze() {
+        sut.placePlayerInMaze()
         let currentRoomOfMaze = sut.mazeNode.currentRoom
         let firstRoomOfMazePosition = sut.mazeNode.position(forRoom: currentRoomOfMaze)
         let playerNode = sut.player.component(ofType: SpriteComponent.self)?.node
@@ -49,17 +100,22 @@ class GameTests: XCTestCase {
         XCTAssertEqual(playerPosition, firstRoomOfMazePosition)
     }
     
-    func testInit_shouldAddPlayerNodeAsChildOfMazeNode() {
+    func testPlacePlayerInMaze_shouldAddPlayerNodeAsChildOfMazeNode() {
+        sut.placePlayerInMaze()
         let playerNode = sut.player.component(ofType: SpriteComponent.self)!.node
         XCTAssertTrue(sut.mazeNode.children.contains(playerNode))
     }
     
-    func testInit_shouldAddPlayerToEntities() {
+    func testPlacePlayerInMaze_shouldAddPlayerToEntities() {
+        sut.placePlayerInMaze()
         let player = sut.player
         XCTAssertTrue(sut.entities.contains(player))
     }
     
-    func testInit_shouldSetPositionOfGoalToPositionOfLastDeadEndOfMaze() {
+    // MARK: placeGoalInMaze
+    
+    func testPlaceGoalInMaze_shouldSetPositionOfGoalToPositionOfLastDeadEndOfMaze() {
+        sut.placeGoalInMaze()
         let lastDeadEnd = sut.mazeNode.deadEnds()!.last!
         let lastDeadEndPosition = sut.mazeNode.position(forRoom: lastDeadEnd)
         let goalNode = sut.goal!.component(ofType: SpriteComponent.self)?.node
@@ -67,18 +123,49 @@ class GameTests: XCTestCase {
         XCTAssertEqual(goalPosition, lastDeadEndPosition)
     }
     
-    func testInit_shouldAddGoalNodeAsChildOfMazeNode() {
+    func testPlaceGoalInMaze_shouldAddGoalNodeAsChildOfMazeNode() {
+        sut.placeGoalInMaze()
         let goalNode = sut.goal!.component(ofType: SpriteComponent.self)!.node
         XCTAssertTrue(sut.mazeNode.children.contains(goalNode))
     }
     
-    func testInit_shouldAddGoalToEntities() {
+    func testPlaceGoalInMaze_shouldAddGoalToEntities() {
+        sut.placeGoalInMaze()
         let goal = sut.goal!
         XCTAssertTrue(sut.entities.contains(goal))
     }
     
+    // MARK: placeKeysInMaze
+    
+    func testPlaceKeysInMaze_shouldSetPositionOfKeysToPositionOfTheRoomPropertyOnTheKey() {
+        sut = Game(level: LevelMock(number: 1, numberOfKeys: 3))
+        sut.mazeNode = MazeNodeMock(numberOfDeadEnds: 5)
+        sut.placeKeysInMaze()
+        for key in sut.keys {
+            let keyNode = key.component(ofType: SpriteComponent.self)?.node
+            let keyPosition = sut.mazeNode.position(forRoom: key.room)
+            XCTAssertEqual(keyPosition, keyNode?.position)
+        }
+    }
+    
+    func testPlaceKeysInMaze_shouldAddKeyNodesAsChildrenOfMazeNode() {
+        sut = Game(level: LevelMock(number: 1, numberOfKeys: 3))
+        sut.mazeNode = MazeNodeMock(numberOfDeadEnds: 5)
+        sut.placeKeysInMaze()
+        for key in sut.keys {
+            let keyNode = key.component(ofType: SpriteComponent.self)!.node
+            XCTAssertTrue(sut.mazeNode.children.contains(keyNode))
+        }
+    }
+    
+    func testPlaceKeysInMaze_shouldAddKeysToEntities() {
+        sut = Game(level: LevelMock(number: 1, numberOfKeys: 3))
+        sut.mazeNode = MazeNodeMock(numberOfDeadEnds: 5)
+        sut.placeKeysInMaze()
+        for key in sut.keys {
+            XCTAssertTrue(sut.entities.contains(key))
+        }
+    }
+    
     
 }
-
-
-

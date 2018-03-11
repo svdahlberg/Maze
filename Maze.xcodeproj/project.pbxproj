@@ -24,6 +24,8 @@
 		B27973501D60807F00FE6313 /* MazeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B279734F1D60807F00FE6313 /* MazeFactory.swift */; };
 		B27973531D6081AD00FE6313 /* MazeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27973521D6081AD00FE6313 /* MazeNode.swift */; };
 		B29075EB2054480F007A2D44 /* GameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29075EA2054480F007A2D44 /* GameTests.swift */; };
+		B29075EE205509F7007A2D44 /* LevelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29075ED205509F7007A2D44 /* LevelMock.swift */; };
+		B29075F020550A00007A2D44 /* MazeNodeMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29075EF20550A00007A2D44 /* MazeNodeMock.swift */; };
 		B2C154A21F657554009A041C /* ClassExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C154A11F657554009A041C /* ClassExtensions.swift */; };
 		B2C154A41F657831009A041C /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C154A31F657831009A041C /* Key.swift */; };
 		B2C154A61F671225009A041C /* BaseScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C154A51F671225009A041C /* BaseScene.swift */; };
@@ -98,6 +100,8 @@
 		B279734F1D60807F00FE6313 /* MazeFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MazeFactory.swift; sourceTree = "<group>"; };
 		B27973521D6081AD00FE6313 /* MazeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MazeNode.swift; sourceTree = "<group>"; };
 		B29075EA2054480F007A2D44 /* GameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTests.swift; sourceTree = "<group>"; };
+		B29075ED205509F7007A2D44 /* LevelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelMock.swift; sourceTree = "<group>"; };
+		B29075EF20550A00007A2D44 /* MazeNodeMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MazeNodeMock.swift; sourceTree = "<group>"; };
 		B2C154A11F657554009A041C /* ClassExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassExtensions.swift; sourceTree = "<group>"; };
 		B2C154A31F657831009A041C /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
 		B2C154A51F671225009A041C /* BaseScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseScene.swift; sourceTree = "<group>"; };
@@ -173,6 +177,15 @@
 			name = Nodes;
 			sourceTree = "<group>";
 		};
+		B29075EC205509DD007A2D44 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				B29075ED205509F7007A2D44 /* LevelMock.swift */,
+				B29075EF20550A00007A2D44 /* MazeNodeMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		B2C83C8B1CD270F800975C75 = {
 			isa = PBXGroup;
 			children = (
@@ -216,6 +229,7 @@
 		B2C83CAF1CD270F900975C75 /* MazeTests */ = {
 			isa = PBXGroup;
 			children = (
+				B29075EC205509DD007A2D44 /* Mocks */,
 				B2222FEF204BE40B0070F272 /* ArrayExtensionsTests.swift */,
 				B29075EA2054480F007A2D44 /* GameTests.swift */,
 				B2316925204DC6B1003BCD74 /* LevelTests.swift */,
@@ -489,7 +503,9 @@
 			files = (
 				B2222FF0204BE40B0070F272 /* ArrayExtensionsTests.swift in Sources */,
 				B231691F204C092E003BCD74 /* MazeSolverTests.swift in Sources */,
+				B29075EE205509F7007A2D44 /* LevelMock.swift in Sources */,
 				B2316926204DC6B2003BCD74 /* LevelTests.swift in Sources */,
+				B29075F020550A00007A2D44 /* MazeNodeMock.swift in Sources */,
 				B2316922204DAB53003BCD74 /* TimeIntervalExtensionsTests.swift in Sources */,
 				B29075EB2054480F007A2D44 /* GameTests.swift in Sources */,
 			);
