@@ -71,6 +71,10 @@ class GameScene: BaseScene {
         hudNode.updateScale()
     }
     
+    func updateHud() {
+        hudNode.movesLeft = game.numberOfMovesLeft
+    }
+    
     // MARK: Update
     
     override func update(_ currentTime: TimeInterval) {

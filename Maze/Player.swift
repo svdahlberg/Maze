@@ -10,8 +10,9 @@ import SpriteKit
 import GameplayKit
 
 protocol PlayerDelegate: class {
-    func playerDidReachGoal(_ goal: Goal)
-    func playerDidCollectKey(_ key: Key)
+    func player(_ player: Player, didReach goal: Goal)
+    func player(_ player: Player, didCollect key: Key)
+    func player(_ player: Player, didMoveIn direction: Direction)
 }
 
 class Player: GKEntity {
@@ -70,6 +71,7 @@ class Player: GKEntity {
         }
         playerNode.run(SKAction.sequence([moveAction, completion]), withKey: moveActionKey)
         numberOfMovesMade += 1
+        delegate?.player(self, didMoveIn: direction)
     }
     
 }
@@ -78,12 +80,12 @@ class Player: GKEntity {
 extension Player: ContactNotifiableType {
     func contactWithEntityDidBegin(_ entity: GKEntity, contact: SKPhysicsContact) {
         if let goal = entity as? Goal {
-            delegate?.playerDidReachGoal(goal)
+            delegate?.player(self, didReach: goal)
         }
         
         if let key = entity as? Key {
             key.collected = true
-            delegate?.playerDidCollectKey(key)
+            delegate?.player(self, didCollect: key)
         }
     }
     

@@ -28,7 +28,6 @@ class GameSceneActiveState: GKState {
     
     override func update(deltaTime seconds: TimeInterval) {
         super.update(deltaTime: seconds)
-        
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
@@ -46,7 +45,8 @@ class GameSceneActiveState: GKState {
 }
 
 extension GameSceneActiveState: PlayerDelegate {
-    func playerDidReachGoal(_ goal: Goal) {
+    
+    func player(_ player: Player, didReach goal: Goal) {
         guard gameScene.game.allKeysCollected else {
             print("Need more keys")
             return
@@ -55,9 +55,14 @@ extension GameSceneActiveState: PlayerDelegate {
         stateMachine?.enter(GameSceneSuccessState.self)
     }
     
-    func playerDidCollectKey(_ key: Key) {
+    func player(_ player: Player, didCollect key: Key) {
         print("Key collected")
     }
+    
+    func player(_ player: Player, didMoveIn direction: Direction) {
+        gameScene.updateHud()
+    }
+
 }
 
 
