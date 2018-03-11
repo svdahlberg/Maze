@@ -55,6 +55,10 @@ class Game {
         return numberOfMovesFromStartToGoal - player.numberOfMovesMade
     }
     
+    var failingCondition: Bool {
+        return numberOfMovesLeft == 0
+    }
+    
     private(set) lazy var numberOfMovesFromStartToGoal: Int? = {
         let path = mazeSolver?.solve()
         return path?.rooms().count

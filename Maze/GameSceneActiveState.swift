@@ -28,12 +28,19 @@ class GameSceneActiveState: GKState {
     
     override func update(deltaTime seconds: TimeInterval) {
         super.update(deltaTime: seconds)
+        
+        if gameScene.game.failingCondition {
+            stateMachine?.enter(GameSceneFailState.self)
+        }
+        
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
         switch stateClass {
-        case is GameSceneSuccessState.Type: return true
-        default: return false
+        case is GameSceneSuccessState.Type, is GameSceneFailState.Type:
+            return true
+        default:
+            return false
         }
     }
     

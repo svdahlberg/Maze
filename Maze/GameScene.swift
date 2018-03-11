@@ -33,7 +33,8 @@ class GameScene: BaseScene {
     private lazy var stateMachine: GKStateMachine = GKStateMachine(states: [
         GameSceneIntroState(gameScene: self),
         GameSceneActiveState(gameScene: self),
-        GameSceneSuccessState(gameScene: self)
+        GameSceneSuccessState(gameScene: self),
+        GameSceneFailState(gameScene: self)
         ])
     
     override func sceneDidLoad() {
