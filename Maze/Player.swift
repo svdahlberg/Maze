@@ -17,7 +17,11 @@ protocol PlayerDelegate: class {
 class Player: GKEntity {
     
     var movementDirection: Direction?
+    
     var isControllable: Bool = true
+    
+    private(set) var numberOfMovesMade: Int = 0
+    
     weak var delegate: PlayerDelegate?
     
     private let movementSpeed: CGFloat = 200
@@ -65,6 +69,7 @@ class Player: GKEntity {
             self.movementDirection = nil
         }
         playerNode.run(SKAction.sequence([moveAction, completion]), withKey: moveActionKey)
+        numberOfMovesMade += 1
     }
     
 }

@@ -13,7 +13,7 @@ class GameSceneOverlayState: GKState {
     
     unowned let gameScene: GameScene
     
-    var overlay: SceneOverlay!
+    var overlay: OverlayNode!
     var overlaySceneFileName: String { fatalError("Unimplemented overlaySceneName") }
     
     init(gameScene: GameScene) {
@@ -21,7 +21,7 @@ class GameSceneOverlayState: GKState {
         
         super.init()
         
-        overlay = SceneOverlay(overlaySceneFileName: overlaySceneFileName, zPosition: 1000)
+        overlay = OverlayNode(overlaySceneFileName: overlaySceneFileName, zPosition: 1000)
     }
     
     override func didEnter(from previousState: GKState?) {

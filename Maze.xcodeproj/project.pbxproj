@@ -27,11 +27,13 @@
 		B29075EE205509F7007A2D44 /* LevelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29075ED205509F7007A2D44 /* LevelMock.swift */; };
 		B29075F020550A00007A2D44 /* MazeNodeMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29075EF20550A00007A2D44 /* MazeNodeMock.swift */; };
 		B29075F220552F4E007A2D44 /* MazeSolverMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29075F120552F4E007A2D44 /* MazeSolverMock.swift */; };
+		B29075F420553776007A2D44 /* HUD.sks in Resources */ = {isa = PBXBuildFile; fileRef = B29075F320553776007A2D44 /* HUD.sks */; };
+		B29075F6205537C9007A2D44 /* HUDNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29075F5205537C9007A2D44 /* HUDNode.swift */; };
 		B2C154A21F657554009A041C /* ClassExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C154A11F657554009A041C /* ClassExtensions.swift */; };
 		B2C154A41F657831009A041C /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C154A31F657831009A041C /* Key.swift */; };
 		B2C154A61F671225009A041C /* BaseScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C154A51F671225009A041C /* BaseScene.swift */; };
 		B2C154A81F6712E0009A041C /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C154A71F6712E0009A041C /* ButtonNode.swift */; };
-		B2C154AA1F67137C009A041C /* SceneOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C154A91F67137C009A041C /* SceneOverlay.swift */; };
+		B2C154AA1F67137C009A041C /* OverlayNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C154A91F67137C009A041C /* OverlayNode.swift */; };
 		B2C154AC1F6714E9009A041C /* GameSceneOverlayState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C154AB1F6714E9009A041C /* GameSceneOverlayState.swift */; };
 		B2C83C981CD270F900975C75 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C83C971CD270F900975C75 /* AppDelegate.swift */; };
 		B2C83C9C1CD270F900975C75 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C83C9B1CD270F900975C75 /* GameScene.swift */; };
@@ -103,11 +105,13 @@
 		B29075ED205509F7007A2D44 /* LevelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelMock.swift; sourceTree = "<group>"; };
 		B29075EF20550A00007A2D44 /* MazeNodeMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MazeNodeMock.swift; sourceTree = "<group>"; };
 		B29075F120552F4E007A2D44 /* MazeSolverMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MazeSolverMock.swift; sourceTree = "<group>"; };
+		B29075F320553776007A2D44 /* HUD.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = HUD.sks; sourceTree = "<group>"; };
+		B29075F5205537C9007A2D44 /* HUDNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUDNode.swift; sourceTree = "<group>"; };
 		B2C154A11F657554009A041C /* ClassExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassExtensions.swift; sourceTree = "<group>"; };
 		B2C154A31F657831009A041C /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
 		B2C154A51F671225009A041C /* BaseScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseScene.swift; sourceTree = "<group>"; };
 		B2C154A71F6712E0009A041C /* ButtonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonNode.swift; sourceTree = "<group>"; };
-		B2C154A91F67137C009A041C /* SceneOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneOverlay.swift; sourceTree = "<group>"; };
+		B2C154A91F67137C009A041C /* OverlayNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayNode.swift; sourceTree = "<group>"; };
 		B2C154AB1F6714E9009A041C /* GameSceneOverlayState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSceneOverlayState.swift; sourceTree = "<group>"; };
 		B2C83C941CD270F800975C75 /* Maze.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Maze.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2C83C971CD270F900975C75 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -185,6 +189,15 @@
 				B29075F120552F4E007A2D44 /* MazeSolverMock.swift */,
 			);
 			path = Mocks;
+			sourceTree = "<group>";
+		};
+		B29075F720553DB8007A2D44 /* HUD */ = {
+			isa = PBXGroup;
+			children = (
+				B29075F320553776007A2D44 /* HUD.sks */,
+				B29075F5205537C9007A2D44 /* HUDNode.swift */,
+			);
+			name = HUD;
 			sourceTree = "<group>";
 		};
 		B2C83C8B1CD270F800975C75 = {
@@ -267,7 +280,7 @@
 			isa = PBXGroup;
 			children = (
 				B2C154A51F671225009A041C /* BaseScene.swift */,
-				B2C154A91F67137C009A041C /* SceneOverlay.swift */,
+				B2C154A91F67137C009A041C /* OverlayNode.swift */,
 				B2D486C81F49796400D82D1B /* GameScene */,
 			);
 			name = Scenes;
@@ -280,6 +293,7 @@
 				B2222FED204AB20F0070F272 /* Game.swift */,
 				B2316923204DC64C003BCD74 /* Level.swift */,
 				B2D486D21F497CF500D82D1B /* GameScene + SKPhysicsContactDelegate.swift */,
+				B29075F720553DB8007A2D44 /* HUD */,
 				B2D486E01F49EC2C00D82D1B /* States */,
 			);
 			name = GameScene;
@@ -437,6 +451,7 @@
 			files = (
 				B2C83CA61CD270F900975C75 /* LaunchScreen.storyboard in Resources */,
 				B2C83CA31CD270F900975C75 /* Assets.xcassets in Resources */,
+				B29075F420553776007A2D44 /* HUD.sks in Resources */,
 				B231692C204F1C5A003BCD74 /* SuccessScene.sks in Resources */,
 				B2C83CA11CD270F900975C75 /* Main.storyboard in Resources */,
 			);
@@ -465,6 +480,7 @@
 			files = (
 				B2C83C9C1CD270F900975C75 /* GameScene.swift in Sources */,
 				B2D486D01F497C7B00D82D1B /* ContactNotifiableType.swift in Sources */,
+				B29075F6205537C9007A2D44 /* HUDNode.swift in Sources */,
 				B2D486D71F49DAC700D82D1B /* LightComponent.swift in Sources */,
 				B2222FEE204AB20F0070F272 /* Game.swift in Sources */,
 				B231691D204C0584003BCD74 /* MazeSolver.swift in Sources */,
@@ -480,7 +496,7 @@
 				B2C154A21F657554009A041C /* ClassExtensions.swift in Sources */,
 				B2D486D91F49DB9700D82D1B /* SpriteComponent.swift in Sources */,
 				B2C83C981CD270F900975C75 /* AppDelegate.swift in Sources */,
-				B2C154AA1F67137C009A041C /* SceneOverlay.swift in Sources */,
+				B2C154AA1F67137C009A041C /* OverlayNode.swift in Sources */,
 				B2216FE41F372C0800576F36 /* Wall.swift in Sources */,
 				B2C154A41F657831009A041C /* Key.swift in Sources */,
 				B2D486E21F4CBDC600D82D1B /* PhysicsComponent.swift in Sources */,

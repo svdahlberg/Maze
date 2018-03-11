@@ -13,13 +13,14 @@ class GameScene: BaseScene {
     private var lastUpdateTime: TimeInterval = 0
     var playerCamera: SKCameraNode
     let cameraScale: CGFloat = 0.25
-    
+    private var hudNode: HUDNode
     
     let game: Game
     
     init(size: CGSize, level: Level) {
         game = Game(level: level)
         playerCamera = SKCameraNode()
+        hudNode = HUDNode(movesLeft: game.numberOfMovesFromStartToGoal)
         super.init(size: size)
     }
     
@@ -52,6 +53,7 @@ class GameScene: BaseScene {
         game.placeKeysInMaze()
         setupPlayerControls()
         setupCamera()
+        setupHUD()
         stateMachine.enter(GameSceneIntroState.self)
     }
  
@@ -60,6 +62,13 @@ class GameScene: BaseScene {
     private func setupCamera() {
         addChild(playerCamera)
         camera = playerCamera
+    }
+    
+    // MARK: HUD
+    
+    private func setupHUD() {
+        playerCamera.addChild(hudNode)
+        hudNode.updateScale()
     }
     
     // MARK: Update
