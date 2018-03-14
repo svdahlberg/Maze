@@ -37,6 +37,9 @@ class GameSceneIntroState: GKState {
         
         gameScene.game.player.isControllable = true
         gameScene.isUserInteractionEnabled = true
+        
+        let lightComponent = LightComponent(lightCategory: .playerLight)
+        gameScene.game.player.addComponent(lightComponent)
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
@@ -65,8 +68,10 @@ class GameSceneIntroState: GKState {
         let zoomInAction = SKAction.scale(to: gameScene.cameraScale, duration: 1)
         zoomInAction.timingMode = .easeIn
         
-        let lightNode = SKLightNode()
-        gameScene.playerCamera.addChild(lightNode)
+        let cursorNode = SKSpriteNode(color: .yellow, size: CGSize(width: 5, height: 5))
+        gameScene.playerCamera.addChild(cursorNode)
+//        let lightNode = SKLightNode()
+//        gameScene.playerCamera.addChild(lightNode)
         let path = MazeSolver(maze: mazeNode.maze, start: goal.room, end: mazeNode.maze.currentRoom).solve()
         let roomPath = path!.rooms()
         let positionPath = roomPath.map { mazeNode.position(forRoom: $0) }
@@ -82,7 +87,8 @@ class GameSceneIntroState: GKState {
         let actionSequence = SKAction.sequence([zoomOutAction, SKAction.sequence(pathActions), zoomInAction])
         
         gameScene.playerCamera.run(actionSequence) {
-            lightNode.removeFromParent()
+//            lightNode.removeFromParent()
+            cursorNode.removeFromParent()
             completion()
         }
     }

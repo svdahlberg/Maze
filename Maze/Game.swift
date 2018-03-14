@@ -43,6 +43,10 @@ class Game {
     var allKeysCollected: Bool {
         return !keys.contains { !$0.collected }
     }
+    
+    var failingCondition: Bool {
+        return numberOfMovesLeft == 0
+    }
 
     lazy var mazeSolver: MazeSolver? = {
         guard let goalRoom = goalRoom else { return nil }
@@ -53,10 +57,6 @@ class Game {
     var numberOfMovesLeft: Int? {
         guard let numberOfMovesFromStartToGoal = numberOfMovesFromStartToGoal else { return nil }
         return numberOfMovesFromStartToGoal - player.numberOfMovesMade
-    }
-    
-    var failingCondition: Bool {
-        return numberOfMovesLeft == 0
     }
     
     private(set) lazy var numberOfMovesFromStartToGoal: Int? = {

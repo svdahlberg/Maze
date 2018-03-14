@@ -43,9 +43,6 @@ class Player: GKEntity {
         let physicsComponent = PhysicsComponent(physicsBody: physicsBody, colliderType: .player)
         addComponent(physicsComponent)
         spriteComponent.node.physicsBody = physicsComponent.physicsBody
-        
-        let lightComponent = LightComponent(lightCategory: .playerLight)
-        addComponent(lightComponent)
     
     }
     

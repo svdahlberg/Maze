@@ -167,13 +167,17 @@ class GameTests: XCTestCase {
         }
     }
     
-    // MARK: numberOfMoves
+    // MARK: numberOfMovesFromStartToGoal
     
-    func testNumberOfMoves_shouldReturnNumberOfRoomsInPathFromPlayerStartingRoomToGoalRoom() {
+    func testNumberOfMovesFromStartToGoal_withNoKeys_shouldReturnNumberOfRoomsInPathFromPlayerStartingRoomToGoalRoom() {
         let mazeSolverMock = MazeSolverMock()
         sut.mazeSolver = mazeSolverMock
         XCTAssertEqual(sut.numberOfMovesFromStartToGoal, mazeSolverMock.solve()?.rooms().count)
     }
+    
+    
+    
+    // MARK: numberOfMovesLeft
     
     func testNumberOfMovesLeft_withNumberOfMovesFromStartToGoalNotNilAndNumberOFMovesByPlayerZero_shouldReturnNumberOfMovesFromStartToGoal() {
         let mazeSolverMock = MazeSolverMock()
