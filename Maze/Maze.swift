@@ -34,7 +34,8 @@ class Maze {
         currentRoom = matrix[0][0]
 
         createWalls()
-        removeWalls()
+//        removeWalls()
+        removeWallsUsingPrimsAlgorithm()
     }
 
     func possibleDirectionsToTravelIn(from room: Room) -> [Direction] {
@@ -178,10 +179,8 @@ class Maze {
                 let nextRoom = unvisitedAdjacentRooms[Int(arc4random_uniform(UInt32(unvisitedAdjacentRooms.count)))]
                 roomStack.append(nextRoom)
 
-                let wallToRemove = wall(between: currentRoom, room2: nextRoom)
-                currentRoom.walls = currentRoom.walls.filter() { $0 != wallToRemove }
-                nextRoom.walls = nextRoom.walls.filter() { $0 != wallToRemove }
-
+                removeWall(between: currentRoom, and: nextRoom)
+                
                 currentRoom = nextRoom
                 visitedRooms.append(currentRoom)
             } else {
@@ -191,8 +190,14 @@ class Maze {
             }
         }
     }
+    
+    func removeWall(between room1: Room, and room2: Room) {
+        let wallToRemove = wall(between: room1, room2: room2)
+        room1.walls = room1.walls.filter() { $0 != wallToRemove }
+        room2.walls = room2.walls.filter() { $0 != wallToRemove }
+    }
 
-    private func adjacentRooms(of room: Room) -> [Room] {
+    func adjacentRooms(of room: Room) -> [Room] {
         var rooms = [Room]()
         if room.x + 1 < rows {
             rooms.append(matrix[room.x + 1][room.y])
