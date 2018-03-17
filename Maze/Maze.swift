@@ -52,6 +52,12 @@ class Maze {
         return possibleMovingDirections
     }
 
+    func room(in direction: Direction, of room: Room) -> Room {
+        let roomPosition = (x: room.x, y: room.y)
+        let positionChange = direction.positionChange
+        return matrix[roomPosition.x + positionChange.x][roomPosition.y + positionChange.y]
+    }
+    
     func nextStop(in direction: Direction, from room: Room) -> Room {
         var currentRoom = room
         switch direction {

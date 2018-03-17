@@ -35,7 +35,7 @@ class MazeSolver {
             visitedRooms.append(currentPath.room)
             
             for direction in maze.possibleDirectionsToTravelIn(from: currentPath.room) {
-                let nextRoom = maze.nextStop(in: direction, from: currentPath.room)
+                let nextRoom = maze.room(in: direction, of: currentPath.room)
                 guard !visitedRooms.contains(nextRoom) else { continue }
                 frontier.append(Path(to: nextRoom, directionTraveledIn: direction, previousPath: currentPath))
             }
