@@ -54,6 +54,11 @@ class Game {
         return mazeSolver
     }()
     
+    lazy var mazeSolution: [Room]? = {
+        guard let path = mazeSolver?.solve(skipCorridorsInSolution: false) else { return nil }
+        return path.rooms().reversed()
+    }()
+    
     var numberOfMovesLeft: Int? {
         guard let numberOfMovesFromStartToGoal = numberOfMovesFromStartToGoal else { return nil }
         return numberOfMovesFromStartToGoal - player.numberOfMovesMade

@@ -15,7 +15,7 @@ class MazeSolverMock: MazeSolver {
         super.init(maze: Maze(dimensions: MazeDimensions(rows: 3, columns: 3)), start: Room(x: 0, y: 0), end: Room(x: 0, y: 2))
     }
     
-    override func solve() -> Path? {
+    override func solve(skipCorridorsInSolution: Bool = true) -> Path? {
         return PathMock()
     }
     

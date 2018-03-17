@@ -27,7 +27,7 @@ class GameSceneIntroState: GKState {
         gameScene.game.player.isControllable = false
         gameScene.isUserInteractionEnabled = false
         
-        showGoalAndMap {
+        runIntroAnimation {
             self.stateMachine?.enter(GameSceneActiveState.self)
         }
     }
@@ -40,6 +40,8 @@ class GameSceneIntroState: GKState {
         
         let lightComponent = LightComponent(lightCategory: .playerLight)
         gameScene.game.player.addComponent(lightComponent)
+        
+        toggleSolution(hidden: true)
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
@@ -49,9 +51,8 @@ class GameSceneIntroState: GKState {
         }
     }
     
-    private func showGoalAndMap(completion: @escaping () -> Void) {
-        guard let goal = game.goal,
-            let goalNode = goal.component(ofType: SpriteComponent.self)?.node,
+    private func runIntroAnimation(completion: @escaping () -> Void) {
+        guard let goalNode = game.goal?.component(ofType: SpriteComponent.self)?.node,
             let playerNode = game.player.component(ofType: SpriteComponent.self)?.node
             else { return }
         
@@ -68,28 +69,38 @@ class GameSceneIntroState: GKState {
         let zoomInAction = SKAction.scale(to: gameScene.cameraScale, duration: 1)
         zoomInAction.timingMode = .easeIn
         
-        let cursorNode = SKSpriteNode(color: .yellow, size: CGSize(width: 5, height: 5))
-        gameScene.playerCamera.addChild(cursorNode)
-//        let lightNode = SKLightNode()
-//        gameScene.playerCamera.addChild(lightNode)
-        let path = MazeSolver(maze: mazeNode.maze, start: goal.room, end: mazeNode.maze.currentRoom).solve()
-        let roomPath = path!.rooms()
-        let positionPath = roomPath.map { mazeNode.position(forRoom: $0) }
+
         
-        var previousPoint = goalPosition
-        let pathActions = positionPath.map { (position: CGPoint) -> SKAction in
-            let point = gameScene.convert(position, from: mazeNode)
-            let action = SKAction.move(to: point, duration: TimeInterval.duration(toMoveFrom: previousPoint, to: point, with: 200))
-            previousPoint = point
-            return action
-        }
+        let showSolutionAction = SKAction.run { self.toggleSolution(hidden: false) }
         
-        let actionSequence = SKAction.sequence([zoomOutAction, SKAction.sequence(pathActions), zoomInAction])
+        let actionSequence = SKAction.sequence([zoomOutAction, showSolutionAction, moveToPlayerAction, zoomInAction])
         
         gameScene.playerCamera.run(actionSequence) {
-//            lightNode.removeFromParent()
-            cursorNode.removeFromParent()
             completion()
         }
+        
     }
+    
+    private func solutionAction(with delay: TimeInterval) -> SKAction {
+        return SKAction.sequence(
+            [SKAction.colorize(with: SKColor.gray, colorBlendFactor: 1, duration: 0.2),
+             SKAction.wait(forDuration: delay),
+             SKAction.colorize(with: SKColor.white, colorBlendFactor: 1, duration: 0),
+             SKAction.colorize(with: SKColor.lightGray, colorBlendFactor: 1, duration: 0.3)]
+        )
+    }
+    
+    private func toggleSolution(hidden: Bool) {
+        guard let mazeSolution = game.mazeSolution else { return }
+        var actionDelay: TimeInterval = 0
+        let actionInterval = 0.5 / Double(mazeSolution.count)
+        
+        for i in 0...mazeSolution.count - 1 {
+            actionDelay += actionInterval
+            guard let roomNode = mazeNode.roomNode(with: mazeSolution[i]) else { continue }
+            let action = hidden ? solutionAction(with: actionDelay).reversed() : solutionAction(with: actionDelay)
+            roomNode.floorNode.run(action)
+        }
+    }
+    
 }

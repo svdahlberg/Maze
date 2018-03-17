@@ -21,7 +21,7 @@ class MazeSolver {
         self.end = end
     }
     
-    func solve() -> Path? {
+    func solve(skipCorridorsInSolution: Bool = true) -> Path? {
         var frontier = [Path(to: start)]
         var visitedRooms = [Room]()
         
@@ -35,7 +35,9 @@ class MazeSolver {
             visitedRooms.append(currentPath.room)
             
             for direction in maze.possibleDirectionsToTravelIn(from: currentPath.room) {
-                let nextRoom = maze.room(in: direction, of: currentPath.room)
+                let nextRoom = skipCorridorsInSolution ?
+                    maze.nextStop(in: direction, from: currentPath.room) :
+                    maze.room(in: direction, of: currentPath.room)
                 guard !visitedRooms.contains(nextRoom) else { continue }
                 frontier.append(Path(to: nextRoom, directionTraveledIn: direction, previousPath: currentPath))
             }
@@ -75,7 +77,9 @@ class Path {
             let previousPath = previousPath else {
             return accumulatedDirections.reversed()
         }
+        
         accumulatedDirections.append(directionTraveledIn)
+        
         return previousPath.directions(accumulatedDirections: accumulatedDirections)
     }
     

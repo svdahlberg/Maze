@@ -14,17 +14,18 @@ class RoomNode: SKSpriteNode {
     var room: Room
     let wallWidth: CGFloat = 3
     let wallColor: SKColor = .black
+    let floorNode: SKSpriteNode
     
-    init(texture: SKTexture?, color: UIColor, size: CGSize, room: Room, maze: Maze) {
+    init(color: UIColor, size: CGSize, room: Room, maze: Maze) {
         self.room = room
-        super.init(texture: texture, color: color, size: size)
+        self.floorNode = SKSpriteNode(color: color, size: size)
+        super.init(texture: nil, color: .clear, size: size)
+        addChild(floorNode)
         createWalls()
         createOuterWalls(inMaze: maze)
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    required init?(coder aDecoder: NSCoder) { return nil }
     
     private func createWalls() {
         room.walls.forEach { createWall($0.wallPlacement) }

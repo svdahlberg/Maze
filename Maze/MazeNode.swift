@@ -18,6 +18,8 @@ class MazeNode: SKSpriteNode {
         }
     }
     
+    var roomNodes = [RoomNode]()
+    
     init(color: UIColor, size: CGSize, dimensions: MazeDimensions) {
         maze = Maze(dimensions: dimensions)
         roomSize = CGSize(width: size.width/CGFloat(maze.dimensions.rows), height: size.height/CGFloat(maze.dimensions.columns))
@@ -41,17 +43,20 @@ class MazeNode: SKSpriteNode {
         shadowedBitMask = LightCategory.allValuesBitMask()
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    required init?(coder aDecoder: NSCoder) { return nil }
+    
+    func roomNode(with room: Room) -> RoomNode? {
+        return roomNodes.first { $0.room == room }
     }
     
     private func addRooms() {
         for i in 0...maze.rows - 1 {
             for j in 0...maze.columns - 1 {
                 let room = maze.matrix[i][j]
-                let roomNode = RoomNode(texture: nil, color: SKColor.clear, size: roomSize, room: room, maze: maze)
+                let roomNode = RoomNode(color: SKColor.clear, size: roomSize, room: room, maze: maze)
                 roomNode.position = position(forRoom: room)
                 addChild(roomNode)
+                roomNodes.append(roomNode)
             }
         }
     }
