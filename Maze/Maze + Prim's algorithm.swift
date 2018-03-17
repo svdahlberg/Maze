@@ -33,7 +33,7 @@ extension Maze {
     }
     
     func randomRoom() -> Room {
-        return matrix[Int(arc4random_uniform(UInt32(columns - 1)))][Int(arc4random_uniform(UInt32(rows - 1)))]
+        return matrix[Int(arc4random_uniform(UInt32(columns)))][Int(arc4random_uniform(UInt32(rows)))]
     }
     
 }
@@ -41,7 +41,7 @@ extension Maze {
 extension Array {
     
     func randomElement() -> Element {
-        return self[Int(arc4random_uniform(UInt32(count - 1)))]
+        return self[Int(arc4random_uniform(UInt32(count)))]
     }
     
 }
