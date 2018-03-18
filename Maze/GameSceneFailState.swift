@@ -30,15 +30,11 @@ class GameSceneFailState: GameSceneOverlayState {
     }
     
     private func presentSameLevelGameScene() {
-        let scene = GameScene(size: gameScene.size, level: Level(number: gameScene.game.level.number))
-        
         guard let view = gameScene.view else { return }
-        view.ignoresSiblingOrder = true
-        scene.scaleMode = .aspectFill
         let transition = SKTransition.reveal(with: .down, duration: 1)
         transition.pausesOutgoingScene = false
         transition.pausesIncomingScene = false
-        view.presentScene(scene, transition: transition)
+        SceneManager(presentingView: view).presentScene(with: .game(Level(number: gameScene.game.level.number)), transition: transition)
     }
 }
 
