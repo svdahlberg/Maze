@@ -14,7 +14,7 @@ class Game {
     
     private(set) var entities = Set<GKEntity>()
     
-    lazy var mazeNode = MazeNode(color: .darkGray, roomSize: CGSize(width: 30, height: 30), dimensions: level.mazeDimensions)
+    lazy var mazeNode = MazeNode(color: Appearance.mazeFloorColor, roomSize: CGSize(width: 30, height: 30), dimensions: level.mazeDimensions)
     
     let player: Player
     

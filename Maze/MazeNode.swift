@@ -53,7 +53,7 @@ class MazeNode: SKSpriteNode {
         for i in 0...maze.rows - 1 {
             for j in 0...maze.columns - 1 {
                 let room = maze.matrix[i][j]
-                let roomNode = RoomNode(color: SKColor.clear, size: roomSize, room: room, maze: maze)
+                let roomNode = RoomNode(color: .clear, size: roomSize, room: room, maze: maze)
                 roomNode.position = position(forRoom: room)
                 addChild(roomNode)
                 roomNodes.append(roomNode)

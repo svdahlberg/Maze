@@ -13,7 +13,7 @@ class RoomNode: SKSpriteNode {
     
     var room: Room
     let wallWidth: CGFloat = 3
-    let wallColor: SKColor = .black
+    let wallColor: SKColor = Appearance.backgroundColor
     let floorNode: SKSpriteNode
     
     init(color: UIColor, size: CGSize, room: Room, maze: Maze) {

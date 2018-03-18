@@ -11,7 +11,11 @@ import GameplayKit
 
 class GameSceneSuccessState: GameSceneOverlayState {
     
-    private var continueButton: ButtonNode?
+    private lazy var continueButton: ButtonNode? = {
+        let buttonNode = overlay.contentNode.childNode(withName: "continueButton") as? ButtonNode
+        buttonNode?.color = Appearance.accentColor
+        return buttonNode
+    }()
     
     override var overlaySceneFileName: String {
         return "SuccessScene"
@@ -20,7 +24,6 @@ class GameSceneSuccessState: GameSceneOverlayState {
     override func didEnter(from previousState: GKState?) {
         super.didEnter(from: previousState)
         
-        continueButton = overlay.contentNode.childNode(withName: "continueButton") as? ButtonNode
         continueButton?.action = { [weak self] () in self?.presentNextLevelGameScene() }
         
     }

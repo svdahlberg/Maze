@@ -10,7 +10,11 @@ import SpriteKit
 
 class HomeScene: BaseScene {
     
-    private lazy var startButton: ButtonNode? = childNode(withName: "StartButton") as? ButtonNode
+    private lazy var startButton: ButtonNode? = {
+        let buttonNode = childNode(withName: "StartButton") as? ButtonNode
+        buttonNode?.color = Appearance.accentColor
+        return buttonNode
+    }()
     
     override func sceneDidLoad() {
         super.sceneDidLoad()
@@ -18,6 +22,7 @@ class HomeScene: BaseScene {
         startButton?.action = { [weak self] () in
             self?.startGame()
         }
+        
         
     }
     

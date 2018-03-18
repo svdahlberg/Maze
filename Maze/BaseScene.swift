@@ -31,6 +31,8 @@ class BaseScene: SKScene {
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         
+        backgroundColor = Appearance.backgroundColor
+        
         overlay?.updateScale()
     }
     

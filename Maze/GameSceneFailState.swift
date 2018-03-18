@@ -11,7 +11,11 @@ import GameplayKit
 
 class GameSceneFailState: GameSceneOverlayState {
     
-    private var tryAgainButton: ButtonNode?
+    private lazy var tryAgainButton: ButtonNode? = {
+        let buttonNode = overlay.contentNode.childNode(withName: "tryAgainButton") as? ButtonNode
+        buttonNode?.color = Appearance.accentColor
+        return buttonNode
+    }()
     
     override var overlaySceneFileName: String {
         return "FailScene"
@@ -20,7 +24,6 @@ class GameSceneFailState: GameSceneOverlayState {
     override func didEnter(from previousState: GKState?) {
         super.didEnter(from: previousState)
         
-        tryAgainButton = overlay.contentNode.childNode(withName: "tryAgainButton") as? ButtonNode
         tryAgainButton?.action = { [weak self] () in self?.presentSameLevelGameScene() }
         
     }

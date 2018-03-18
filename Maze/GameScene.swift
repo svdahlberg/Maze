@@ -40,7 +40,6 @@ class GameScene: BaseScene {
     override func sceneDidLoad() {
         super.sceneDidLoad()
         lastUpdateTime = 0
-        backgroundColor = .black
         physicsWorld.contactDelegate = self
         physicsWorld.gravity = CGVector(dx: 0, dy: 0)
     }
