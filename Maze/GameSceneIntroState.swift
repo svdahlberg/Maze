@@ -58,36 +58,29 @@ class GameSceneIntroState: GKState {
         
         let goalPosition = gameScene.convert(goalNode.position, from: mazeNode)
         let playerPosition = gameScene.convert(playerNode.position, from: mazeNode)
+        let mazeCenterPosition = CGPoint(x: mazeNode.position.x + (mazeNode.frame.width / 2), y: mazeNode.position.y - (mazeNode.frame.height / 2))
         
         gameScene.playerCamera.position = goalPosition
         gameScene.playerCamera.setScale(gameScene.cameraScale)
         
-        let zoomOutAction = SKAction.scale(to: 2, duration: 2)
-        zoomOutAction.timingMode = .easeOut
-        let moveToPlayerAction = SKAction.move(to: playerPosition, duration: 3)
-        moveToPlayerAction.timingMode = .easeInEaseOut
+        let zoomedOutScale = (mazeNode.size.width * 1.5) / gameScene.frame.width
+        
+        let zoomOutAction = SKAction.scale(to: zoomedOutScale, duration: 1)
+        let moveToCenterAction = SKAction.move(to: mazeCenterPosition, duration: 1)
+        moveToCenterAction.timingMode = .easeOut
+        let waitDuration = Double(game.numberOfMovesFromStartToGoal ?? 0) * 0.2
+        let waitAction = SKAction.wait(forDuration: waitDuration)
+        let moveToPlayerAction = SKAction.move(to: playerPosition, duration: 1)
+        moveToPlayerAction.timingMode = .easeIn
         let zoomInAction = SKAction.scale(to: gameScene.cameraScale, duration: 1)
-        zoomInAction.timingMode = .easeIn
-        
-
-        
+        zoomInAction.timingMode = .easeOut
         let showSolutionAction = SKAction.run { self.toggleSolution(hidden: false) }
         
-        let actionSequence = SKAction.sequence([zoomOutAction, showSolutionAction, moveToPlayerAction, zoomInAction])
+        let actionSequence = SKAction.sequence([zoomOutAction, moveToCenterAction, showSolutionAction, waitAction, moveToPlayerAction, zoomInAction])
         
         gameScene.playerCamera.run(actionSequence) {
             completion()
         }
-        
-    }
-    
-    private func solutionAction(with delay: TimeInterval) -> SKAction {
-        return SKAction.sequence(
-            [SKAction.colorize(with: SKColor.gray, colorBlendFactor: 1, duration: 0.2),
-             SKAction.wait(forDuration: delay),
-             SKAction.colorize(with: SKColor.white, colorBlendFactor: 1, duration: 0),
-             SKAction.colorize(with: SKColor.lightGray, colorBlendFactor: 1, duration: 0.3)]
-        )
     }
     
     private func toggleSolution(hidden: Bool) {
@@ -98,7 +91,13 @@ class GameSceneIntroState: GKState {
         for i in 0...mazeSolution.count - 1 {
             actionDelay += actionInterval
             guard let roomNode = mazeNode.roomNode(with: mazeSolution[i]) else { continue }
-            let action = hidden ? solutionAction(with: actionDelay).reversed() : solutionAction(with: actionDelay)
+            let colorizeAction = SKAction.sequence(
+                [SKAction.colorize(with: SKColor.gray, colorBlendFactor: 1, duration: 0.2),
+                 SKAction.wait(forDuration: actionDelay),
+                 SKAction.colorize(with: SKColor.white, colorBlendFactor: 1, duration: 0),
+                 SKAction.colorize(with: SKColor.lightGray, colorBlendFactor: 1, duration: 0.3)]
+            )
+            let action = hidden ? colorizeAction.reversed() : colorizeAction
             roomNode.floorNode.run(action)
         }
     }
