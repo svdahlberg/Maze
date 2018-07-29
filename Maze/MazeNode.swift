@@ -65,6 +65,10 @@ class MazeNode: SKSpriteNode {
         return maze.possibleDirectionsToTravelIn(from: currentRoom)
     }
     
+    func possibleDirectionsToTravelIn(from room: Room) -> [Direction] {
+        return maze.possibleDirectionsToTravelIn(from: room)
+    }
+    
     func updateCurrentRoom(withRoomInDirection direction: Direction) {
         currentRoom = maze.nextStop(in: direction, from: currentRoom)
     }

@@ -28,6 +28,8 @@ class Player: GKEntity {
     private let movementSpeed: CGFloat = 200
     private let moveActionKey = "MovePlayer"
     
+    private lazy var spriteNode: SKSpriteNode? = component(ofType: SpriteComponent.self)?.node
+    private lazy var mazeNode: MazeNode? = spriteNode?.parent as? MazeNode
     
     override init() {
         super.init()
@@ -43,16 +45,14 @@ class Player: GKEntity {
         let physicsComponent = PhysicsComponent(physicsBody: physicsBody, colliderType: .player)
         addComponent(physicsComponent)
         spriteComponent.node.physicsBody = physicsComponent.physicsBody
-    
+
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    required init?(coder aDecoder: NSCoder) { return nil }
     
-    func move(inDirection direction: Direction, inMazeNode mazeNode: MazeNode) {
+    func move(inDirection direction: Direction) {
         guard isControllable else { return }
-        guard let playerNode = component(ofType: SpriteComponent.self)?.node else { return }
+        guard let playerNode = spriteNode, let mazeNode = mazeNode else { return }
         var possibleDirectionsToTravelIn = mazeNode.possibleDirectionsToTravelIn()
         if let movementDirection = movementDirection {
             possibleDirectionsToTravelIn = [movementDirection.opposite]
@@ -65,10 +65,13 @@ class Player: GKEntity {
         let completion = SKAction.run {
             mazeNode.updateCurrentRoom(withRoomInDirection: direction)
             self.movementDirection = nil
+//            self.addComponent(MovementIndicatorComponent(directions: mazeNode.possibleDirectionsToTravelIn()))
         }
+        
         playerNode.run(SKAction.sequence([moveAction, completion]), withKey: moveActionKey)
         numberOfMovesMade += 1
         delegate?.player(self, didMoveIn: direction)
+//        removeComponent(ofType: MovementIndicatorComponent.self)
     }
     
 }

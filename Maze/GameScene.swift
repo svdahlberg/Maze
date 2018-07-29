@@ -13,7 +13,8 @@ class GameScene: BaseScene {
     private var lastUpdateTime: TimeInterval = 0
     var playerCamera: SKCameraNode
     let cameraScale: CGFloat = 0.25
-    private var hudNode: HUDNode
+    private let hudNode: HUDNode
+    private let swipeControls: SwipeControls
     
     let game: Game
     
@@ -21,6 +22,7 @@ class GameScene: BaseScene {
         game = Game(level: level)
         playerCamera = SKCameraNode()
         hudNode = HUDNode(movesLeft: game.numberOfMovesFromStartToGoal)
+        swipeControls = SwipeControls()
         super.init(size: size)
     }
     
@@ -51,7 +53,8 @@ class GameScene: BaseScene {
         game.placePlayerInMaze()
         game.placeGoalInMaze()
         game.placeKeysInMaze()
-        setupPlayerControls()
+        swipeControls.setup(on: view)
+        swipeControls.delegate = self
         setupCamera()
         setupHUD()
         stateMachine.enter(GameSceneIntroState.self)
@@ -103,30 +106,10 @@ class GameScene: BaseScene {
         touches.forEach { _ in playerCamera.setScale(cameraScale) }
     }
     
-    
-    private func setupPlayerControls() {
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe))
-        swipeRight.direction = .right
-        view?.addGestureRecognizer(swipeRight)
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe))
-        swipeLeft.direction = .left
-        view?.addGestureRecognizer(swipeLeft)
-        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe))
-        swipeUp.direction = .up
-        view?.addGestureRecognizer(swipeUp)
-        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe))
-        swipeDown.direction = .down
-        view?.addGestureRecognizer(swipeDown)
-    }
-    
-    @objc private func handleSwipe(_ gesture: UISwipeGestureRecognizer) -> Void {
-        switch gesture.direction {
-        case UISwipeGestureRecognizerDirection.right: game.player.move(inDirection: .right, inMazeNode: mazeNode)
-        case UISwipeGestureRecognizerDirection.left: game.player.move(inDirection: .left, inMazeNode: mazeNode)
-        case UISwipeGestureRecognizerDirection.up: game.player.move(inDirection: .up, inMazeNode: mazeNode)
-        case UISwipeGestureRecognizerDirection.down: game.player.move(inDirection: .down, inMazeNode: mazeNode)
-        default: break
-        }
-    }
 }
 
+extension GameScene: SwipeControlsDelegate {
+    func swipeControls(_ swipeControls: SwipeControls, didSwipeIn direction: Direction) {
+        game.player.move(inDirection: direction)
+    }
+}

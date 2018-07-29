@@ -24,6 +24,8 @@ class GameSceneActiveState: GKState {
         super.didEnter(from: previousState)
         
         setupPlayerCamera()
+        
+//        gameScene.game.player.addComponent(MovementIndicatorComponent(directions: gameScene.game.mazeNode.possibleDirectionsToTravelIn()))
     }
     
     override func update(deltaTime seconds: TimeInterval) {

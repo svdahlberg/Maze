@@ -28,6 +28,8 @@
 		B27973531D6081AD00FE6313 /* MazeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27973521D6081AD00FE6313 /* MazeNode.swift */; };
 		B279EBC4205EBA280049A78B /* SceneManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B279EBC3205EBA280049A78B /* SceneManager.swift */; };
 		B282767A205EC6790050AA76 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2827679205EC6790050AA76 /* Appearance.swift */; };
+		B28D72EE2062E26E00B09457 /* MovementIndicatorNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28D72ED2062E26E00B09457 /* MovementIndicatorNode.swift */; };
+		B28D72F02062E28800B09457 /* MovementIndicatorComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28D72EF2062E28800B09457 /* MovementIndicatorComponent.swift */; };
 		B29075EB2054480F007A2D44 /* GameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29075EA2054480F007A2D44 /* GameTests.swift */; };
 		B29075EE205509F7007A2D44 /* LevelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29075ED205509F7007A2D44 /* LevelMock.swift */; };
 		B29075F020550A00007A2D44 /* MazeNodeMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29075EF20550A00007A2D44 /* MazeNodeMock.swift */; };
@@ -58,6 +60,7 @@
 		B2D486DD1F49DDE200D82D1B /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D486DC1F49DDE200D82D1B /* Player.swift */; };
 		B2D486DF1F49E0E600D82D1B /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D486DE1F49E0E600D82D1B /* Goal.swift */; };
 		B2D486E21F4CBDC600D82D1B /* PhysicsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D486E11F4CBDC600D82D1B /* PhysicsComponent.swift */; };
+		B2FD9681205F02D200CCAA8C /* SwipeControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FD9680205F02D200CCAA8C /* SwipeControls.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +108,8 @@
 		B27973521D6081AD00FE6313 /* MazeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MazeNode.swift; sourceTree = "<group>"; };
 		B279EBC3205EBA280049A78B /* SceneManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneManager.swift; sourceTree = "<group>"; };
 		B2827679205EC6790050AA76 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
+		B28D72ED2062E26E00B09457 /* MovementIndicatorNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementIndicatorNode.swift; sourceTree = "<group>"; };
+		B28D72EF2062E28800B09457 /* MovementIndicatorComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementIndicatorComponent.swift; sourceTree = "<group>"; };
 		B29075EA2054480F007A2D44 /* GameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTests.swift; sourceTree = "<group>"; };
 		B29075ED205509F7007A2D44 /* LevelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelMock.swift; sourceTree = "<group>"; };
 		B29075EF20550A00007A2D44 /* MazeNodeMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MazeNodeMock.swift; sourceTree = "<group>"; };
@@ -139,6 +144,7 @@
 		B2D486DC1F49DDE200D82D1B /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		B2D486DE1F49E0E600D82D1B /* Goal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		B2D486E11F4CBDC600D82D1B /* PhysicsComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsComponent.swift; sourceTree = "<group>"; };
+		B2FD9680205F02D200CCAA8C /* SwipeControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeControls.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +188,7 @@
 				B27973521D6081AD00FE6313 /* MazeNode.swift */,
 				B2216FE51F372C3900576F36 /* RoomNode.swift */,
 				B2C154A71F6712E0009A041C /* ButtonNode.swift */,
+				B28D72ED2062E26E00B09457 /* MovementIndicatorNode.swift */,
 			);
 			name = Nodes;
 			sourceTree = "<group>";
@@ -288,6 +295,7 @@
 			isa = PBXGroup;
 			children = (
 				B2C83C9B1CD270F900975C75 /* GameScene.swift */,
+				B2FD9680205F02D200CCAA8C /* SwipeControls.swift */,
 				B2222FED204AB20F0070F272 /* Game.swift */,
 				B2316923204DC64C003BCD74 /* Level.swift */,
 				B2D486D21F497CF500D82D1B /* GameScene + SKPhysicsContactDelegate.swift */,
@@ -322,6 +330,7 @@
 				B2D486D81F49DB9700D82D1B /* SpriteComponent.swift */,
 				B2D486E11F4CBDC600D82D1B /* PhysicsComponent.swift */,
 				B2D486D61F49DAC700D82D1B /* LightComponent.swift */,
+				B28D72EF2062E28800B09457 /* MovementIndicatorComponent.swift */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -453,6 +462,7 @@
 				B2D486D01F497C7B00D82D1B /* ContactNotifiableType.swift in Sources */,
 				B29075F6205537C9007A2D44 /* HUDNode.swift in Sources */,
 				B2D486D71F49DAC700D82D1B /* LightComponent.swift in Sources */,
+				B28D72F02062E28800B09457 /* MovementIndicatorComponent.swift in Sources */,
 				B2222FEE204AB20F0070F272 /* Game.swift in Sources */,
 				B231691D204C0584003BCD74 /* MazeSolver.swift in Sources */,
 				B2D486CE1F497C0600D82D1B /* ColliderType.swift in Sources */,
@@ -466,6 +476,8 @@
 				B2D486D31F497CF500D82D1B /* GameScene + SKPhysicsContactDelegate.swift in Sources */,
 				B2C154A21F657554009A041C /* ClassExtensions.swift in Sources */,
 				B2D486D91F49DB9700D82D1B /* SpriteComponent.swift in Sources */,
+				B2FD9681205F02D200CCAA8C /* SwipeControls.swift in Sources */,
+				B28D72EE2062E26E00B09457 /* MovementIndicatorNode.swift in Sources */,
 				B279EBC4205EBA280049A78B /* SceneManager.swift in Sources */,
 				B2C83C981CD270F900975C75 /* AppDelegate.swift in Sources */,
 				B282767A205EC6790050AA76 /* Appearance.swift in Sources */,
