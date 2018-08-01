@@ -10,7 +10,9 @@ import SpriteKit
 
 class ButtonNode: SKSpriteNode {
     
-    var action: (() -> ())?
+    var onPress: (() -> ())?
+    
+    override var canBecomeFocused: Bool { return true }
     
     private lazy var scaleDownAction: SKAction = {
         let action = SKAction.scale(by: 0.9, duration: 0.1)
@@ -59,7 +61,11 @@ class ButtonNode: SKSpriteNode {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
         isHighlighted = false
-        if contains(touches: touches) { action?() }
+        #if os(iOS)
+            if contains(touches: touches) { onPress?() }
+        #elseif os(tvOS)
+            onPress?()
+        #endif
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -74,6 +80,16 @@ class ButtonNode: SKSpriteNode {
             let touchPoint = touch.location(in: scene)
             let touchedNode = scene.atPoint(touchPoint)
             return touchedNode === self || touchedNode.inParentHierarchy(self)
+        }
+    }
+    
+    override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+        if context.previouslyFocusedItem === self {
+            // SKAction to reset focus animation for unfocused button
+        }
+        
+        if context.nextFocusedItem === self {
+            // SKAction to run focus animation for focused button
         }
     }
   

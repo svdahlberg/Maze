@@ -15,7 +15,11 @@ enum SceneIdentifier {
     func scene(view: SKView) -> SKScene? {
         switch self {
         case .home:
-            return HomeScene(fileNamed: "HomeScene")
+            #if os(iOS)
+                return HomeScene(fileNamed: "HomeScene")
+            #elseif os(tvOS)
+                return HomeScene(fileNamed: "HomeSceneTV")
+            #endif
         case .game(let level):
             return GameScene(size: view.frame.size, level: level)
         }
@@ -29,7 +33,7 @@ struct SceneManager {
     func presentScene(with sceneIdentifier: SceneIdentifier, transition: SKTransition = .fade(withDuration: 0.5)) {
         guard let scene = sceneIdentifier.scene(view: presentingView) else { return }
         presentingView.ignoresSiblingOrder = true
-        scene.scaleMode = .aspectFill
+        scene.scaleMode = .aspectFit
         presentingView.presentScene(scene, transition: transition)
     }
     

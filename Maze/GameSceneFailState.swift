@@ -24,7 +24,7 @@ class GameSceneFailState: GameSceneOverlayState {
     override func didEnter(from previousState: GKState?) {
         super.didEnter(from: previousState)
         
-        tryAgainButton?.action = { [weak self] () in self?.presentSameLevelGameScene() }
+        tryAgainButton?.onPress = { [weak self] () in self?.presentSameLevelGameScene() }
         
     }
     

@@ -24,7 +24,7 @@ class GameSceneSuccessState: GameSceneOverlayState {
     override func didEnter(from previousState: GKState?) {
         super.didEnter(from: previousState)
         
-        continueButton?.action = { [weak self] () in self?.presentNextLevelGameScene() }
+        continueButton?.onPress = { [weak self] () in self?.presentNextLevelGameScene() }
         
     }
     

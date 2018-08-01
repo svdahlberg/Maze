@@ -18,6 +18,8 @@ class GameScene: BaseScene {
     
     let game: Game
     
+    override var canBecomeFocused: Bool { return true }
+    
     init(size: CGSize, level: Level) {
         game = Game(level: level)
         playerCamera = SKCameraNode()
@@ -60,14 +62,14 @@ class GameScene: BaseScene {
         stateMachine.enter(GameSceneIntroState.self)
     }
  
-    // MARK: Camera
+    // MARK: - Camera
     
     private func setupCamera() {
         addChild(playerCamera)
         camera = playerCamera
     }
     
-    // MARK: HUD
+    // MARK: - HUD
     
     private func setupHUD() {
         playerCamera.addChild(hudNode)
@@ -78,7 +80,7 @@ class GameScene: BaseScene {
         hudNode.movesLeft = game.numberOfMovesLeft
     }
     
-    // MARK: Update
+    // MARK: - Update
     
     override func update(_ currentTime: TimeInterval) {
         super.update(currentTime)
@@ -91,8 +93,9 @@ class GameScene: BaseScene {
         stateMachine.update(deltaTime: dt)
     }
     
-    // MARK: Touch Input
+    // MARK: - 3D Touch
     
+    #if os(iOS)
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         touches.forEach { touch in
             let force = touch.force/10
@@ -105,6 +108,7 @@ class GameScene: BaseScene {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         touches.forEach { _ in playerCamera.setScale(cameraScale) }
     }
+    #endif
     
 }
 

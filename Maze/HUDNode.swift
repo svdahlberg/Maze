@@ -29,7 +29,13 @@ class HUDNode: SKNode {
         return contentNode
     }()
     
-    private lazy var hudScene = SKScene(fileNamed: "HUD")
+    private lazy var hudScene: SKScene? = {
+        #if os(iOS)
+        return SKScene(fileNamed: "HUD")
+        #elseif os(tvOS)
+        return SKScene(fileNamed: "HUDTV")
+        #endif
+    }()
     
     private lazy var nativeContentSize = hudScene?.size
     

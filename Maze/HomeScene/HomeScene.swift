@@ -19,10 +19,9 @@ class HomeScene: BaseScene {
     override func sceneDidLoad() {
         super.sceneDidLoad()
         
-        startButton?.action = { [weak self] () in
+        startButton?.onPress = { [weak self] in
             self?.startGame()
         }
-        
         
     }
     
@@ -32,4 +31,15 @@ class HomeScene: BaseScene {
     }
     
     
+  
+    
 }
+
+#if os(tvOS)
+extension HomeScene {
+    override var preferredFocusEnvironments: [UIFocusEnvironment] {
+        guard let startButton = startButton else { return [] }
+        return [startButton]
+    }
+}
+#endif
