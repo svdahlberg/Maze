@@ -13,7 +13,7 @@ class RoomNode: SKSpriteNode {
     
     var room: Room
     let wallWidth: CGFloat = 3
-    let wallColor: SKColor = Appearance.backgroundColor
+    let wallColor: SKColor = Appearance.mazeWallColor
     let floorNode: SKSpriteNode
     
     init(color: UIColor, size: CGSize, room: Room, maze: Maze) {
@@ -61,8 +61,8 @@ class RoomNode: SKSpriteNode {
     
     private func wallSizeForPlacement(_ placement: WallPlacement) -> CGSize {
         switch placement {
-        case .right, .left: return CGSize(width: wallWidth, height: frame.size.height + wallWidth * 2)
-        case .top, .bottom: return CGSize(width: frame.size.width + wallWidth * 2, height: wallWidth)
+        case .right, .left: return CGSize(width: wallWidth, height: frame.size.height + wallWidth)
+        case .top, .bottom: return CGSize(width: frame.size.width + wallWidth, height: wallWidth)
         case .outer: return .zero
         }
     }
@@ -70,13 +70,13 @@ class RoomNode: SKSpriteNode {
     private func wallPositionForPlacement(_ placement: WallPlacement) -> CGPoint {
         switch placement {
         case .right:
-            return CGPoint(x: frame.size.width/2 - wallWidth/2, y: 0)
+            return CGPoint(x: frame.size.width/2, y: 0)
         case .left:
-            return CGPoint(x: -frame.size.width/2 + wallWidth/2, y: 0)
+            return CGPoint(x: -frame.size.width/2, y: 0)
         case .top:
-            return CGPoint(x: 0, y: frame.size.height/2 - wallWidth/2)
+            return CGPoint(x: 0, y: frame.size.height/2)
         case .bottom:
-            return CGPoint(x: 0, y: -frame.size.height/2 + wallWidth/2)
+            return CGPoint(x: 0, y: -frame.size.height/2)
         case .outer:
             return .zero
         }

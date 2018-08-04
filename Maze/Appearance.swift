@@ -15,6 +15,8 @@ struct Appearance {
     
     static let accentColor = SKColor(red: 255/255, green: 147/255, blue: 0, alpha: 1)
     
-    static let mazeFloorColor = SKColor.darkGray
+    static let mazeFloorColor = SKColor.black
+    
+    static let mazeWallColor = SKColor.white
     
 }
