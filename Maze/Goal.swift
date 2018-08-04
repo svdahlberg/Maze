@@ -13,6 +13,13 @@ class Goal: GKEntity {
     
     let room: Room
     
+    var reached: Bool = false {
+        didSet {
+            guard let node = component(ofType: SpriteComponent.self)?.node else { return }
+            node.isHidden = reached
+        }
+    }
+    
     init(room: Room) {
         self.room = room
         super.init()
@@ -20,11 +27,11 @@ class Goal: GKEntity {
         ColliderType.definedCollisions[.goal] = []
         ColliderType.requestedContactNotifications[.goal] = [.player]
         
-        let node = SKSpriteNode(color: .yellow, size: CGSize(width: 20, height: 20))
-        let spriteComponent = SpriteComponent(node: node)
+        let nodeSize = CGSize(width: 10, height: 10)
+        let spriteComponent = SpriteComponent(shape: .circle, size: nodeSize, fillColor: .clear, strokeColor: .yellow)
         addComponent(spriteComponent)
         
-        let physicsBody = SKPhysicsBody(rectangleOf: node.size)
+        let physicsBody = SKPhysicsBody(rectangleOf: nodeSize)
         let physicsComponent = PhysicsComponent(physicsBody: physicsBody, colliderType: .goal)
         addComponent(physicsComponent)
         spriteComponent.node.physicsBody = physicsComponent.physicsBody

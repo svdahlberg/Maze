@@ -9,14 +9,39 @@
 import SpriteKit
 import GameplayKit
 
+enum Shape {
+    
+    case circle, square
+    
+    func node(of size: CGSize) -> SKShapeNode? {
+        switch self {
+        case .circle:
+            return SKShapeNode(circleOfRadius: size.width/2)
+        case .square:
+            return SKShapeNode(rect: CGRect(x: -size.width/2, y: -size.height/2, width: size.width, height: size.height))
+        }
+    }
+    
+}
+
 class SpriteComponent: GKComponent {
     
-    var node = SKSpriteNode()
+    let shape: Shape
     
-    init(node: SKSpriteNode) {
+    let node: SKSpriteNode
+    
+    init(shape: Shape, size: CGSize, fillColor: SKColor, strokeColor: SKColor) {
+        self.shape = shape
+        self.node = SKSpriteNode(color: .clear, size: size)
         super.init()
         node.lightingBitMask = LightCategory.allValuesBitMask()
-        self.node = node
+        
+        guard let shapeNode = shape.node(of: size) else { return }
+        shapeNode.fillColor = fillColor
+        shapeNode.strokeColor = strokeColor
+        shapeNode.isAntialiased = false
+        node.addChild(shapeNode)
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

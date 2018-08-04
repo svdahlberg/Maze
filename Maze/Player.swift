@@ -37,11 +37,11 @@ class Player: GKEntity {
         ColliderType.definedCollisions[.player] = []
         ColliderType.requestedContactNotifications[.player] = [.goal, .key]
     
-        let node = SKSpriteNode(color: .red, size: CGSize(width: 10, height: 10))
-        let spriteComponent = SpriteComponent(node: node)
+        let nodeSize = CGSize(width: 10, height: 10)
+        let spriteComponent = SpriteComponent(shape: .circle, size: nodeSize, fillColor: .red, strokeColor: .clear)
         addComponent(spriteComponent)
         
-        let physicsBody = SKPhysicsBody(rectangleOf: node.size)
+        let physicsBody = SKPhysicsBody(rectangleOf: nodeSize)
         let physicsComponent = PhysicsComponent(physicsBody: physicsBody, colliderType: .player)
         addComponent(physicsComponent)
         spriteComponent.node.physicsBody = physicsComponent.physicsBody
