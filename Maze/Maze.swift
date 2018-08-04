@@ -13,6 +13,10 @@ struct MazeDimensions {
     let columns: Int
 }
 
+enum MazeGenerationAlgorithm {
+    case recursiveBacktracking, prim
+}
+
 class Maze {
     let dimensions: MazeDimensions
     var matrix: [[Room]]
@@ -21,7 +25,7 @@ class Maze {
     var rows: Int { return dimensions.rows }
     var columns: Int { return dimensions.columns }
     
-    init(dimensions: MazeDimensions) {
+    init(dimensions: MazeDimensions, algorithm: MazeGenerationAlgorithm = .prim) {
         self.dimensions = dimensions
 
         matrix = [[Room]](repeating: [Room](repeating: Room(x: 0, y: 0), count: dimensions.columns), count: dimensions.rows)
@@ -34,8 +38,11 @@ class Maze {
         currentRoom = matrix[0][0]
 
         createWalls()
-//        removeWalls()
-        removeWallsUsingPrimsAlgorithm()
+        
+        switch algorithm {
+        case .recursiveBacktracking: removeWallsUsingRecursiveBacktracking()
+        case .prim: removeWallsUsingPrimsAlgorithm()
+        }
     }
 
     func possibleDirectionsToTravelIn(from room: Room) -> [Direction] {
@@ -168,33 +175,6 @@ class Maze {
             (col == 0 && row == rows - 1) ||
             (col == columns - 1 && row == 0) ||
             (col == columns - 1 && row == rows - 1)
-    }
-
-    private func removeWalls() {
-        var currentRoom = matrix[0][0]
-        var roomStack = [currentRoom]
-        var visitedRooms = [currentRoom]
-        while !roomStack.isEmpty {
-            var unvisitedAdjacentRooms = [Room]()
-            for room in adjacentRooms(of: currentRoom) {
-                if !visitedRooms.contains(room) {
-                    unvisitedAdjacentRooms.append(room)
-                }
-            }
-            if !unvisitedAdjacentRooms.isEmpty {
-                let nextRoom = unvisitedAdjacentRooms[Int(arc4random_uniform(UInt32(unvisitedAdjacentRooms.count)))]
-                roomStack.append(nextRoom)
-
-                removeWall(between: currentRoom, and: nextRoom)
-                
-                currentRoom = nextRoom
-                visitedRooms.append(currentRoom)
-            } else {
-                if let room = roomStack.popLast() {
-                    currentRoom = room
-                }
-            }
-        }
     }
     
     func removeWall(between room1: Room, and room2: Room) {

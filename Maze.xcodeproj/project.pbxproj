@@ -16,6 +16,8 @@
 		B2222FF0204BE40B0070F272 /* ArrayExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2222FEF204BE40B0070F272 /* ArrayExtensionsTests.swift */; };
 		B2302BEF2110EEC0006A8F8F /* HomeSceneTV.sks in Resources */ = {isa = PBXBuildFile; fileRef = B2302BEE2110EEC0006A8F8F /* HomeSceneTV.sks */; };
 		B2302BF12110F00B006A8F8F /* HUDTV.sks in Resources */ = {isa = PBXBuildFile; fileRef = B2302BF02110F00B006A8F8F /* HUDTV.sks */; };
+		B2302C182115D42D006A8F8F /* Maze + recursive backtracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2302C172115D42D006A8F8F /* Maze + recursive backtracking.swift */; };
+		B2302C192115D433006A8F8F /* Maze + recursive backtracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2302C172115D42D006A8F8F /* Maze + recursive backtracking.swift */; };
 		B231691D204C0584003BCD74 /* MazeSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B231691C204C0584003BCD74 /* MazeSolver.swift */; };
 		B231691F204C092E003BCD74 /* MazeSolverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B231691E204C092E003BCD74 /* MazeSolverTests.swift */; };
 		B2316922204DAB53003BCD74 /* TimeIntervalExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2316921204DAB53003BCD74 /* TimeIntervalExtensionsTests.swift */; };
@@ -149,6 +151,7 @@
 		B2222FEF204BE40B0070F272 /* ArrayExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensionsTests.swift; sourceTree = "<group>"; };
 		B2302BEE2110EEC0006A8F8F /* HomeSceneTV.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = HomeSceneTV.sks; sourceTree = "<group>"; };
 		B2302BF02110F00B006A8F8F /* HUDTV.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = HUDTV.sks; sourceTree = "<group>"; };
+		B2302C172115D42D006A8F8F /* Maze + recursive backtracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Maze + recursive backtracking.swift"; sourceTree = "<group>"; };
 		B231691C204C0584003BCD74 /* MazeSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MazeSolver.swift; sourceTree = "<group>"; };
 		B231691E204C092E003BCD74 /* MazeSolverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MazeSolverTests.swift; sourceTree = "<group>"; };
 		B2316921204DAB53003BCD74 /* TimeIntervalExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalExtensionsTests.swift; sourceTree = "<group>"; };
@@ -362,6 +365,7 @@
 			children = (
 				B231691C204C0584003BCD74 /* MazeSolver.swift */,
 				B279734D1D606E6D00FE6313 /* Maze.swift */,
+				B2302C172115D42D006A8F8F /* Maze + recursive backtracking.swift */,
 				B211DC77205AF91C00C5F49D /* Maze + Prim's algorithm.swift */,
 				B2D486C51F49577800D82D1B /* Direction.swift */,
 				B2216FE11F372BE700576F36 /* Room.swift */,
@@ -674,6 +678,7 @@
 				B2316924204DC64C003BCD74 /* Level.swift in Sources */,
 				B2C154A81F6712E0009A041C /* ButtonNode.swift in Sources */,
 				B207C144205401E100463375 /* GameSceneIntroState.swift in Sources */,
+				B2302C182115D42D006A8F8F /* Maze + recursive backtracking.swift in Sources */,
 				B2D486CA1F49797C00D82D1B /* GameSceneActiveState.swift in Sources */,
 				B211DC78205AF91C00C5F49D /* Maze + Prim's algorithm.swift in Sources */,
 				B2C154A61F671225009A041C /* BaseScene.swift in Sources */,
@@ -735,6 +740,7 @@
 				B2E4802A210DCB3100086078 /* ColliderType.swift in Sources */,
 				B2E4802E210DCB3400086078 /* ButtonNode.swift in Sources */,
 				B2E48032210DCB3900086078 /* Maze + Prim's algorithm.swift in Sources */,
+				B2302C192115D433006A8F8F /* Maze + recursive backtracking.swift in Sources */,
 				B2E4801B210DCB2100086078 /* HUDNode.swift in Sources */,
 				B2E48019210DCB1A00086078 /* GameScene + SKPhysicsContactDelegate.swift in Sources */,
 				B2E48020210DCB2500086078 /* GameSceneFailState.swift in Sources */,
