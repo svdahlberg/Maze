@@ -18,9 +18,8 @@ struct ColliderType: OptionSet {
     
     static var player: ColliderType { return self.init(rawValue: 1 << 0) }
     static var goal: ColliderType { return self.init(rawValue: 1 << 1) }
-    static var key: ColliderType { return self.init(rawValue: 1 << 2) }
     
-    static let allValues: [ColliderType] = [.player, .goal, .key]
+    static let allValues: [ColliderType] = [.player, .goal]
     
     var categoryMask: UInt32 {
         return rawValue

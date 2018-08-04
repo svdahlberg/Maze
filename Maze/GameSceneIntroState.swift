@@ -52,7 +52,7 @@ class GameSceneIntroState: GKState {
     }
     
     private func runIntroAnimation(completion: @escaping () -> Void) {
-        guard let goalNode = game.goal?.component(ofType: SpriteComponent.self)?.node,
+        guard let goalNode = game.goals.last?.component(ofType: SpriteComponent.self)?.node,
             let playerNode = game.player.component(ofType: SpriteComponent.self)?.node
             else { return }
         
@@ -84,7 +84,7 @@ class GameSceneIntroState: GKState {
     }
     
     private func toggleSolution(hidden: Bool) {
-        guard let mazeSolution = game.mazeSolution else { return }
+        let mazeSolution = game.mazeSolution
         var actionDelay: TimeInterval = 0
         let actionInterval = 0.5 / Double(mazeSolution.count)
         

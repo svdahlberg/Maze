@@ -53,8 +53,7 @@ class GameScene: BaseScene {
         mazeNode.position = CGPoint(x: size.height/2, y: size.height/2)
         addChild(mazeNode)
         game.placePlayerInMaze()
-        game.placeGoalInMaze()
-        game.placeKeysInMaze()
+        game.placeGoalsInMaze()
         swipeControls.setup(on: view)
         swipeControls.delegate = self
         setupCamera()

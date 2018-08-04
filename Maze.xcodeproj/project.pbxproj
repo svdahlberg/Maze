@@ -43,7 +43,6 @@
 		B29075F92055C04F007A2D44 /* GameSceneFailState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29075F82055C04F007A2D44 /* GameSceneFailState.swift */; };
 		B29075FB2055C0E6007A2D44 /* FailScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B29075FA2055C0E6007A2D44 /* FailScene.sks */; };
 		B2C154A21F657554009A041C /* ClassExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C154A11F657554009A041C /* ClassExtensions.swift */; };
-		B2C154A41F657831009A041C /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C154A31F657831009A041C /* Key.swift */; };
 		B2C154A61F671225009A041C /* BaseScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C154A51F671225009A041C /* BaseScene.swift */; };
 		B2C154A81F6712E0009A041C /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C154A71F6712E0009A041C /* ButtonNode.swift */; };
 		B2C154AA1F67137C009A041C /* OverlayNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C154A91F67137C009A041C /* OverlayNode.swift */; };
@@ -90,7 +89,6 @@
 		B2E48022210DCB2500086078 /* SuccessScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B231692B204F1C5A003BCD74 /* SuccessScene.sks */; };
 		B2E48023210DCB2900086078 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D486DC1F49DDE200D82D1B /* Player.swift */; };
 		B2E48024210DCB2900086078 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D486DE1F49E0E600D82D1B /* Goal.swift */; };
-		B2E48025210DCB2900086078 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C154A31F657831009A041C /* Key.swift */; };
 		B2E48026210DCB2C00086078 /* SpriteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D486D81F49DB9700D82D1B /* SpriteComponent.swift */; };
 		B2E48027210DCB2C00086078 /* PhysicsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D486E11F4CBDC600D82D1B /* PhysicsComponent.swift */; };
 		B2E48028210DCB2C00086078 /* LightComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D486D61F49DAC700D82D1B /* LightComponent.swift */; };
@@ -177,7 +175,6 @@
 		B29075F82055C04F007A2D44 /* GameSceneFailState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneFailState.swift; sourceTree = "<group>"; };
 		B29075FA2055C0E6007A2D44 /* FailScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FailScene.sks; sourceTree = "<group>"; };
 		B2C154A11F657554009A041C /* ClassExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassExtensions.swift; sourceTree = "<group>"; };
-		B2C154A31F657831009A041C /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
 		B2C154A51F671225009A041C /* BaseScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseScene.swift; sourceTree = "<group>"; };
 		B2C154A71F6712E0009A041C /* ButtonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonNode.swift; sourceTree = "<group>"; };
 		B2C154A91F67137C009A041C /* OverlayNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayNode.swift; sourceTree = "<group>"; };
@@ -416,7 +413,6 @@
 			children = (
 				B2D486DC1F49DDE200D82D1B /* Player.swift */,
 				B2D486DE1F49E0E600D82D1B /* Goal.swift */,
-				B2C154A31F657831009A041C /* Key.swift */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -669,7 +665,6 @@
 				B282767A205EC6790050AA76 /* Appearance.swift in Sources */,
 				B2C154AA1F67137C009A041C /* OverlayNode.swift in Sources */,
 				B2216FE41F372C0800576F36 /* Wall.swift in Sources */,
-				B2C154A41F657831009A041C /* Key.swift in Sources */,
 				B237E8AA205EB6EE002E1655 /* HomeScene.swift in Sources */,
 				B2D486E21F4CBDC600D82D1B /* PhysicsComponent.swift in Sources */,
 				B2D486DF1F49E0E600D82D1B /* Goal.swift in Sources */,
@@ -729,7 +724,6 @@
 				B2E48017210DCB1A00086078 /* Game.swift in Sources */,
 				B2E47FEE210DC9AA00086078 /* AppDelegate.swift in Sources */,
 				B2E48012210DCB0E00086078 /* Appearance.swift in Sources */,
-				B2E48025210DCB2900086078 /* Key.swift in Sources */,
 				B2E48024210DCB2900086078 /* Goal.swift in Sources */,
 				B2E48030210DCB3900086078 /* MazeSolver.swift in Sources */,
 				B2E4801D210DCB2500086078 /* GameSceneActiveState.swift in Sources */,

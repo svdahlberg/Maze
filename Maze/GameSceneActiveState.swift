@@ -56,16 +56,15 @@ class GameSceneActiveState: GKState {
 extension GameSceneActiveState: PlayerDelegate {
     
     func player(_ player: Player, didReach goal: Goal) {
-        guard gameScene.game.allKeysCollected else {
-            print("Need more keys")
-            return
+        guard player.component(ofType: SpriteComponent.self)?.shape ==
+            goal.component(ofType: SpriteComponent.self)?.shape else {
+                print("Not the same shape")
+                return
         }
         
-        stateMachine?.enter(GameSceneSuccessState.self)
-    }
-    
-    func player(_ player: Player, didCollect key: Key) {
-        print("Key collected")
+        if gameScene.game.allGoalsReached {
+            stateMachine?.enter(GameSceneSuccessState.self)
+        }
     }
     
     func player(_ player: Player, didMoveIn direction: Direction) {

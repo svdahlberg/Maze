@@ -11,7 +11,6 @@ import GameplayKit
 
 protocol PlayerDelegate: class {
     func player(_ player: Player, didReach goal: Goal)
-    func player(_ player: Player, didCollect key: Key)
     func player(_ player: Player, didMoveIn direction: Direction)
 }
 
@@ -35,7 +34,7 @@ class Player: GKEntity {
         super.init()
         
         ColliderType.definedCollisions[.player] = []
-        ColliderType.requestedContactNotifications[.player] = [.goal, .key]
+        ColliderType.requestedContactNotifications[.player] = [.goal]
     
         let nodeSize = CGSize(width: 10, height: 10)
         let spriteComponent = SpriteComponent(shape: .circle, size: nodeSize, fillColor: .red, strokeColor: .clear)
@@ -80,12 +79,8 @@ class Player: GKEntity {
 extension Player: ContactNotifiableType {
     func contactWithEntityDidBegin(_ entity: GKEntity, contact: SKPhysicsContact) {
         if let goal = entity as? Goal {
+            goal.reached = true
             delegate?.player(self, didReach: goal)
-        }
-        
-        if let key = entity as? Key {
-            key.collected = true
-            delegate?.player(self, didCollect: key)
         }
     }
     

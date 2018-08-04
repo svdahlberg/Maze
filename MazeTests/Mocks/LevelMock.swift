@@ -10,12 +10,12 @@
 
 class LevelMock: Level {
     
-    private let numberOfKeysMock: Int
+    private let numberOfGoalsMock: Int
     
-    init(number: Int, numberOfKeys: Int) {
-        numberOfKeysMock = numberOfKeys
+    init(number: Int, numberOfGoals: Int) {
+        numberOfGoalsMock = numberOfGoals
         super.init(number: number)
     }
     
-    override var numberOfKeys: Int { return numberOfKeysMock }
+    override var numberOfGoals: Int { return numberOfGoalsMock }
 }

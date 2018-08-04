@@ -19,9 +19,9 @@ class Level {
     var mazeDimensions: MazeDimensions {
         return MazeDimensions(rows: number * 2 + 2, columns: number  * 2 + 2)
     }
-    
-    var numberOfKeys: Int {
-       return 0
+
+    var numberOfGoals: Int {
+        return 2
     }
     
 }

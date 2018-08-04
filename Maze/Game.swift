@@ -20,43 +20,45 @@ class Game {
     
     let level: Level
     
-    private(set) lazy var goal: Goal? = {
-        guard let goalRoom = goalRoom else { return nil }
-        return Goal(room: goalRoom)
-    }()
+    private(set) lazy var goals: [Goal] = roomsWithGoals.map { Goal(room: $0) }
     
-    private(set) lazy var keys: [Key] = roomsWithKeys.map { Key(room: $0) }
-    
-    init(level: Level) {
+    init(level: Level, player: Player = Player()) {
         self.level = level
-        self.player = Player()
+        self.player = player
     }
     
-    var numberOfKeys: Int {
-        return keys.count
+    var numberOfGoals: Int {
+        return goals.count
     }
     
-    var numberOfCollectedKeys: Int {
-        return keys.filter { $0.collected }.count
+    var numberOfReachedGoals: Int {
+        return goals.filter { $0.reached }.count
     }
     
-    var allKeysCollected: Bool {
-        return !keys.contains { !$0.collected }
+    var allGoalsReached: Bool {
+        return !goals.contains { !$0.reached }
     }
     
     var failingCondition: Bool {
         return numberOfMovesLeft == 0
     }
 
-    lazy var mazeSolver: MazeSolver? = {
-        guard let goalRoom = goalRoom else { return nil }
-        let mazeSolver = MazeSolver(maze: mazeNode.maze, start: playerStartingRoom, end: goalRoom)
-        return mazeSolver
+    lazy var mazeSolvers: [MazeSolver] = {
+        var start = playerStartingRoom
+        var mazeSolvers = [MazeSolver]()
+        goals.forEach {
+            mazeSolvers.append(MazeSolver(maze: mazeNode.maze, start: start, end: $0.room))
+            start = $0.room
+        }
+        
+        return mazeSolvers
     }()
     
-    lazy var mazeSolution: [Room]? = {
-        guard let path = mazeSolver?.solve(skipCorridorsInSolution: false) else { return nil }
-        return path.rooms().reversed()
+    lazy var mazeSolution: [Room] = {
+        return mazeSolvers
+            .reversed()
+            .compactMap { $0.solve(skipCorridorsInSolution: false)?.rooms().reversed() }
+            .flatMap{ $0 }
     }()
     
     var numberOfMovesLeft: Int? {
@@ -65,8 +67,9 @@ class Game {
     }
     
     private(set) lazy var numberOfMovesFromStartToGoal: Int? = {
-        let path = mazeSolver?.solve()
-        return path?.rooms().count
+        return mazeSolution.count
+//        let path = mazeSolver?.solve()
+//        return path?.rooms().count
     }()
     
     func update(with deltaTime: TimeInterval) {
@@ -80,21 +83,12 @@ class Game {
         entities.insert(player)
     }
     
-    func placeGoalInMaze() {
-        guard let goal = goal,
-            let goalNode = goal.component(ofType: SpriteComponent.self)?.node
-            else { return }
-        goalNode.position = mazeNode.position(forRoom: goal.room)
-        mazeNode.addChild(goalNode)
-        entities.insert(goal)
-    }
-    
-    func placeKeysInMaze() {
-        keys.forEach { key in
-            if let keyNode = key.component(ofType: SpriteComponent.self)?.node {
-                keyNode.position = mazeNode.position(forRoom: key.room)
-                mazeNode.addChild(keyNode)
-                entities.insert(key)
+    func placeGoalsInMaze() {
+        goals.forEach { goal in
+            if let goalNode = goal.component(ofType: SpriteComponent.self)?.node {
+                goalNode.position = mazeNode.position(forRoom: goal.room)
+                mazeNode.addChild(goalNode)
+                entities.insert(goal)
             }
         }
     }
@@ -103,14 +97,10 @@ class Game {
         return mazeNode.maze.currentRoom
     }
     
-    private var goalRoom: Room? {
-        return mazeNode.deadEnds()?.last
-    }
-    
-    private var roomsWithKeys: [Room] {
+    private var roomsWithGoals: [Room] {
         guard let deadEnds = mazeNode.deadEnds() else { return [] }
-        let possibleKeyRooms = Array(deadEnds.dropLast().dropFirst())
-        return possibleKeyRooms[randomPick: level.numberOfKeys]
+        let possibleGoalRooms = Array(deadEnds.dropFirst())
+        return Array(possibleGoalRooms.suffix(level.numberOfGoals))
     }
 
 }
