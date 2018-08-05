@@ -20,7 +20,7 @@ class Goal: GKEntity {
         }
     }
     
-    init(room: Room) {
+    init(room: Room, shape: Shape) {
         self.room = room
         super.init()
         
@@ -28,7 +28,7 @@ class Goal: GKEntity {
         ColliderType.requestedContactNotifications[.goal] = [.player]
         
         let nodeSize = CGSize(width: 10, height: 10)
-        let spriteComponent = SpriteComponent(shape: .circle, size: nodeSize, fillColor: .clear, strokeColor: .yellow)
+        let spriteComponent = SpriteComponent(shape: shape, size: nodeSize, fillColor: .clear, strokeColor: .yellow)
         addComponent(spriteComponent)
         
         let physicsBody = SKPhysicsBody(rectangleOf: nodeSize)

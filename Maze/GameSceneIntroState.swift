@@ -68,7 +68,7 @@ class GameSceneIntroState: GKState {
         let zoomOutAction = SKAction.scale(to: zoomedOutScale, duration: 1)
         let moveToCenterAction = SKAction.move(to: mazeCenterPosition, duration: 1)
         moveToCenterAction.timingMode = .easeOut
-        let waitDuration = Double(game.numberOfMovesFromStartToGoal ?? 0) * 0.2
+        let waitDuration = Double(game.numberOfMovesFromStartToGoal) * 0.2
         let waitAction = SKAction.wait(forDuration: waitDuration)
         let moveToPlayerAction = SKAction.move(to: playerPosition, duration: 1)
         moveToPlayerAction.timingMode = .easeIn
@@ -86,7 +86,7 @@ class GameSceneIntroState: GKState {
     private func toggleSolution(hidden: Bool) {
         let mazeSolution = game.mazeSolution
         var actionDelay: TimeInterval = 0
-        let actionInterval = 0.5 / Double(mazeSolution.count)
+        let actionInterval = 3.5 / Double(mazeSolution.count)
         
         for i in 0...mazeSolution.count - 1 {
             actionDelay += actionInterval

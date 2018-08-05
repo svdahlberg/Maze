@@ -56,10 +56,15 @@ class GameSceneActiveState: GKState {
 extension GameSceneActiveState: PlayerDelegate {
     
     func player(_ player: Player, didReach goal: Goal) {
-        guard player.component(ofType: SpriteComponent.self)?.shape ==
-            goal.component(ofType: SpriteComponent.self)?.shape else {
+        guard let playerSpriteComponent = player.component(ofType: SpriteComponent.self),
+            playerSpriteComponent.shape == goal.component(ofType: SpriteComponent.self)?.shape else {
                 print("Not the same shape")
                 return
+        }
+        
+        if let nextGoal = gameScene.game.unreachedGoals.first,
+            let nextGoalShape = nextGoal.component(ofType: SpriteComponent.self)?.shape {
+            playerSpriteComponent.shape = nextGoalShape
         }
         
         if gameScene.game.allGoalsReached {

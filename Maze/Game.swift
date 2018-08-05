@@ -20,7 +20,12 @@ class Game {
     
     let level: Level
     
-    private(set) lazy var goals: [Goal] = roomsWithGoals.map { Goal(room: $0) }
+    private(set) lazy var goals: [Goal] = roomsWithGoals.enumerated().map { (index, room) in
+        guard index != 0 else {
+            return Goal(room: room, shape: .circle)
+        }
+        return Goal(room: room, shape: Shape.random())
+    }
     
     init(level: Level, player: Player = Player()) {
         self.level = level
@@ -33,6 +38,10 @@ class Game {
     
     var numberOfReachedGoals: Int {
         return goals.filter { $0.reached }.count
+    }
+    
+    var unreachedGoals: [Goal] {
+        return goals.filter { !$0.reached }
     }
     
     var allGoalsReached: Bool {
@@ -61,15 +70,15 @@ class Game {
             .flatMap{ $0 }
     }()
     
-    var numberOfMovesLeft: Int? {
-        guard let numberOfMovesFromStartToGoal = numberOfMovesFromStartToGoal else { return nil }
+    var numberOfMovesLeft: Int {
         return numberOfMovesFromStartToGoal - player.numberOfMovesMade
     }
     
-    private(set) lazy var numberOfMovesFromStartToGoal: Int? = {
-        return mazeSolution.count
-//        let path = mazeSolver?.solve()
-//        return path?.rooms().count
+    private(set) lazy var numberOfMovesFromStartToGoal: Int = {
+        return mazeSolvers
+            .compactMap { $0.solve(skipCorridorsInSolution: true)?.rooms() }
+            .flatMap { $0 }
+            .count
     }()
     
     func update(with deltaTime: TimeInterval) {

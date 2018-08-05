@@ -22,30 +22,50 @@ enum Shape {
         }
     }
     
+    static func random() -> Shape {
+        let allCases: [Shape] = [.circle, .square]
+        let randomIndex = Int(arc4random_uniform(UInt32(allCases.count)))
+        return allCases[randomIndex]
+    }
 }
 
 class SpriteComponent: GKComponent {
     
-    let shape: Shape
+    var shape: Shape {
+        didSet {
+            setupShapeNode()
+        }
+    }
     
     let node: SKSpriteNode
     
+    let fillColor: SKColor
+    let strokeColor: SKColor
+    var shapeNode: SKShapeNode?
+    
     init(shape: Shape, size: CGSize, fillColor: SKColor, strokeColor: SKColor) {
         self.shape = shape
+        self.fillColor = fillColor
+        self.strokeColor = strokeColor
         self.node = SKSpriteNode(color: .clear, size: size)
         super.init()
         node.lightingBitMask = LightCategory.allValuesBitMask()
         
-        guard let shapeNode = shape.node(of: size) else { return }
-        shapeNode.fillColor = fillColor
-        shapeNode.strokeColor = strokeColor
-        shapeNode.isAntialiased = false
-        node.addChild(shapeNode)
-        
+        setupShapeNode()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupShapeNode() {
+        guard let shapeNode = shape.node(of: node.size) else { return }
+        self.shapeNode?.removeFromParent()
+        shapeNode.fillColor = fillColor
+        shapeNode.strokeColor = strokeColor
+        shapeNode.isAntialiased = false
+        node.addChild(shapeNode)
+        self.shapeNode = shapeNode
     }
     
     override func didAddToEntity() {
