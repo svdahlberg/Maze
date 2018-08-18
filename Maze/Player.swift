@@ -79,7 +79,6 @@ class Player: GKEntity {
 extension Player: ContactNotifiableType {
     func contactWithEntityDidBegin(_ entity: GKEntity, contact: SKPhysicsContact) {
         if let goal = entity as? Goal {
-            goal.reached = true
             delegate?.player(self, didReach: goal)
         }
     }

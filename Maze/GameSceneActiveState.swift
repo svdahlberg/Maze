@@ -62,6 +62,8 @@ extension GameSceneActiveState: PlayerDelegate {
                 return
         }
         
+        goal.reached = true
+        
         if let nextGoal = gameScene.game.unreachedGoals.first,
             let nextGoalShape = nextGoal.component(ofType: SpriteComponent.self)?.shape {
             playerSpriteComponent.shape = nextGoalShape

@@ -84,22 +84,61 @@ class GameSceneIntroState: GKState {
     }
     
     private func toggleSolution(hidden: Bool) {
-        let mazeSolution = game.mazeSolution
-        var actionDelay: TimeInterval = 0
-        let actionInterval = 3.5 / Double(mazeSolution.count)
+        guard !hidden else { return }
         
-        for i in 0...mazeSolution.count - 1 {
-            actionDelay += actionInterval
-            guard let roomNode = mazeNode.roomNode(with: mazeSolution[i]) else { continue }
-            let colorizeAction = SKAction.sequence(
-                [SKAction.colorize(with: SKColor.gray, colorBlendFactor: 1, duration: 0.2),
-                 SKAction.wait(forDuration: actionDelay),
-                 SKAction.colorize(with: SKColor.white, colorBlendFactor: 1, duration: 0),
-                 SKAction.colorize(with: SKColor.lightGray, colorBlendFactor: 1, duration: 0.3)]
-            )
-            let action = hidden ? colorizeAction.reversed() : colorizeAction
-            roomNode.floorNode.run(action)
+        
+        let mazeSolution = game.mazeSolution
+        guard let firstRoom = mazeSolution.first,
+            let firstRoomNode = mazeNode.roomNode(with: firstRoom) else { return }
+
+        let node = SKSpriteNode(color: .clear, size: CGSize(width: 10, height: 10))
+        node.position = firstRoomNode.position
+        mazeNode.addChild(node)
+        
+        let emitterNode = SKEmitterNode(fileNamed: "Paint")!
+        emitterNode.targetNode = mazeNode
+        node.addChild(emitterNode)
+        
+        
+        
+        let actions: [SKAction] = mazeSolution.compactMap {
+            guard let roomNode = mazeNode.roomNode(with: $0) else { return nil }
+            let moveAction = SKAction.move(to: roomNode.position, duration: 0.2)
+            
+            return SKAction.group([moveAction])
         }
+
+        let sequence = SKAction.sequence(actions)
+        
+        node.run(sequence) {
+            emitterNode.particleBirthRate = 0
+        }
+        
+        
+        
+        
+        
+        
+//        let linePath = CGMutablePath()
+//        linePath.move(to: firstRoomNode.position)
+//
+//        for i in 0...mazeSolution.count - 1 {
+//            guard let roomNode = mazeNode.roomNode(with: mazeSolution[i]) else { continue }
+//
+//            let point = roomNode.position
+//            linePath.addLine(to: point)
+//            linePath.move(to: point)
+//
+//        }
+//
+//        let lineShape = SKShapeNode()
+//        lineShape.path = linePath
+//        lineShape.lineCap = .round
+//        lineShape.strokeColor = .green
+//        lineShape.lineWidth = 2
+//        mazeNode.addChild(lineShape)
+        
+        
     }
     
 }

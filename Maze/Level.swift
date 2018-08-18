@@ -21,7 +21,7 @@ class Level {
     }
 
     var numberOfGoals: Int {
-        return 5
+        return 4
     }
     
 }
